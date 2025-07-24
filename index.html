@@ -176,12 +176,20 @@
                         <span>Last Motion: 2 minutes ago</span>
                         <span>Animals Detected: 2</span>
                     </div>
-                    <div class="mt-3 flex space-x-2">
-                        <button onclick="switchCCTVStation('A1')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">A1</button>
-                        <button onclick="switchCCTVStation('B2')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">B2</button>
-                        <button onclick="switchCCTVStation('C3')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">C3</button>
-                        <button onclick="switchCCTVStation('D4')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">D4</button>
-                    </div>
+                    <div class="mt-3 flex flex-wrap gap-1">
+    <button onclick="switchCCTVStation('A1')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">A1</button>
+    <button onclick="switchCCTVStation('B2')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">B2</button>
+    <button onclick="switchCCTVStation('C3')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">C3</button>
+    <button onclick="switchCCTVStation('D4')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">D4</button>
+    <button onclick="switchCCTVStation('E5')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">E5</button>
+    <button onclick="switchCCTVStation('F6')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">F6</button>
+    <button onclick="switchCCTVStation('G7')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">G7</button>
+    <button onclick="switchCCTVStation('H8')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">H8</button>
+    <button onclick="switchCCTVStation('I9')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">I9</button>
+    <button onclick="switchCCTVStation('J10')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">J10</button>
+    <button onclick="switchCCTVStation('K11')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">K11</button>
+    <button onclick="switchCCTVStation('L12')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">L12</button>
+</div>
                 </div>
 
                 <!-- Station Status -->
@@ -278,43 +286,115 @@
                 <div class="space-y-4">
                     <h3 class="text-xl font-semibold mb-4">Station Status</h3>
                     <div class="space-y-3">
-                        <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('A1')">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h4 class="font-semibold">Station A1</h4>
-                                    <p class="text-sm text-gray-600">Park Avenue & 5th St</p>
-                                </div>
-                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                            </div>
-                        </div>
-                        <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('B2')">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h4 class="font-semibold">Station B2</h4>
-                                    <p class="text-sm text-gray-600">Community Center</p>
-                                </div>
-                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                            </div>
-                        </div>
-                        <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('C3')">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h4 class="font-semibold">Station C3</h4>
-                                    <p class="text-sm text-gray-600">Market Square</p>
-                                </div>
-                                <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
-                            </div>
-                        </div>
-                        <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('D4')">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h4 class="font-semibold">Station D4</h4>
-                                    <p class="text-sm text-gray-600">Riverside Park</p>
-                                </div>
-                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('A1')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station A1</h4>
+                <p class="text-sm text-gray-600">Park Avenue & 5th St</p>
+            </div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('B2')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station B2</h4>
+                <p class="text-sm text-gray-600">Community Center</p>
+            </div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('C3')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station C3</h4>
+                <p class="text-sm text-gray-600">Market Square</p>
+            </div>
+            <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('D4')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station D4</h4>
+                <p class="text-sm text-gray-600">Riverside Park</p>
+            </div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('E5')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station E5</h4>
+                <p class="text-sm text-gray-600">Oak Street Plaza</p>
+            </div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('F6')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station F6</h4>
+                <p class="text-sm text-gray-600">University Campus</p>
+            </div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('G7')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station G7</h4>
+                <p class="text-sm text-gray-600">Shopping District</p>
+            </div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('H8')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station H8</h4>
+                <p class="text-sm text-gray-600">Residential Complex</p>
+            </div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('I9')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station I9</h4>
+                <p class="text-sm text-gray-600">Industrial Park</p>
+            </div>
+            <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('J10')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station J10</h4>
+                <p class="text-sm text-gray-600">Waterfront Promenade</p>
+            </div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('K11')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station K11</h4>
+                <p class="text-sm text-gray-600">Sports Complex</p>
+            </div>
+            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+        </div>
+    </div>
+    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('L12')">
+        <div class="flex items-center justify-between">
+            <div>
+                <h4 class="font-semibold">Station L12</h4>
+                <p class="text-sm text-gray-600">Hospital District</p>
+            </div>
+            <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+        </div>
+    </div>
+</div>
                     
                     <div class="mt-6 p-4 bg-blue-50 rounded-lg">
                         <h4 class="font-semibold text-blue-800 mb-2">Legend</h4>
@@ -501,11 +581,19 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Station Location</label>
                             <select id="stationSelect" class="w-full p-2 border border-gray-300 rounded-lg" onchange="updateQRCode()">
-                                <option value="A1">Station A1 - Park Avenue</option>
-                                <option value="B2">Station B2 - Community Center</option>
-                                <option value="C3">Station C3 - Market Square</option>
-                                <option value="D4">Station D4 - Riverside Park</option>
-                            </select>
+    <option value="A1">Station A1 - Park Avenue</option>
+    <option value="B2">Station B2 - Community Center</option>
+    <option value="C3">Station C3 - Market Square</option>
+    <option value="D4">Station D4 - Riverside Park</option>
+    <option value="E5">Station E5 - Oak Street Plaza</option>
+    <option value="F6">Station F6 - University Campus</option>
+    <option value="G7">Station G7 - Shopping District</option>
+    <option value="H8">Station H8 - Residential Complex</option>
+    <option value="I9">Station I9 - Industrial Park</option>
+    <option value="J10">Station J10 - Waterfront Promenade</option>
+    <option value="K11">Station K11 - Sports Complex</option>
+    <option value="L12">Station L12 - Hospital District</option>
+</select>
                         </div>
                         
                         <div>
@@ -659,61 +747,165 @@
     let map;
     let stationMarkers = {};
 
-    // Station data with coordinates
-    const stationData = {
-        'A1': {
-            name: 'Station A1',
-            location: 'Park Avenue & 5th Street',
-            coordinates: [14.5995, 120.9842], // Manila coordinates as example
-            status: 'Active',
-            foodLevel: '85%',
-            waterLevel: '92%',
-            lastVisit: '2 minutes ago',
-            animalsToday: 5,
-            description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
-            cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+A1', // Replace with actual CCTV image URL
-            qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+A1' // Replace with actual QR code image URL
-        },
-        'B2': {
-            name: 'Station B2',
-            location: 'Community Center',
-            coordinates: [14.6042, 120.9822],
-            status: 'Active',
-            foodLevel: '67%',
-            waterLevel: '78%',
-            lastVisit: '15 minutes ago',
-            animalsToday: 3,
-            description: 'Located near the community center, this station serves both cats and dogs. Regular maintenance by local volunteers.',
-            cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+B2',
-            qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+B2'
-        },
-        'C3': {
-            name: 'Station C3',
-            location: 'Market Square',
-            coordinates: [14.5935, 120.9775],
-            status: 'Needs Attention',
-            foodLevel: '23%',
-            waterLevel: '45%',
-            lastVisit: '1 hour ago',
-            animalsToday: 7,
-            description: 'Busy location that requires frequent refills. Popular with local stray population.',
-            cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+C3',
-            qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+C3'
-        },
-        'D4': {
-            name: 'Station D4',
-            location: 'Riverside Park',
-            coordinates: [14.6089, 120.9899],
-            status: 'Active',
-            foodLevel: '91%',
-            waterLevel: '88%',
-            lastVisit: '30 minutes ago',
-            animalsToday: 2,
-            description: 'Peaceful park location, recently installed. Growing popularity among local strays.',
-            cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+D4',
-            qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+D4'
-        }
-    };
+    // Station data with coordinates - Updated to include 12 stations
+const stationData = {
+    'A1': {
+        name: 'Station A1',
+        location: 'Park Avenue & 5th Street',
+        coordinates: [14.5995, 120.9842], // Manila coordinates as example
+        status: 'Active',
+        foodLevel: '85%',
+        waterLevel: '92%',
+        lastVisit: '2 minutes ago',
+        animalsToday: 5,
+        description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+A1',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+A1'
+    },
+    'B2': {
+        name: 'Station B2',
+        location: 'Community Center',
+        coordinates: [14.6042, 120.9822],
+        status: 'Active',
+        foodLevel: '67%',
+        waterLevel: '78%',
+        lastVisit: '15 minutes ago',
+        animalsToday: 3,
+        description: 'Located near the community center, this station serves both cats and dogs. Regular maintenance by local volunteers.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+B2',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+B2'
+    },
+    'C3': {
+        name: 'Station C3',
+        location: 'Market Square',
+        coordinates: [14.5935, 120.9775],
+        status: 'Needs Attention',
+        foodLevel: '23%',
+        waterLevel: '45%',
+        lastVisit: '1 hour ago',
+        animalsToday: 7,
+        description: 'Busy location that requires frequent refills. Popular with local stray population.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+C3',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+C3'
+    },
+    'D4': {
+        name: 'Station D4',
+        location: 'Riverside Park',
+        coordinates: [14.6089, 120.9899],
+        status: 'Active',
+        foodLevel: '91%',
+        waterLevel: '88%',
+        lastVisit: '30 minutes ago',
+        animalsToday: 2,
+        description: 'Peaceful park location, recently installed. Growing popularity among local strays.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+D4',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+D4'
+    },
+    'E5': {
+        name: 'Station E5',
+        location: 'Oak Street Plaza',
+        coordinates: [14.5878, 120.9756],
+        status: 'Active',
+        foodLevel: '74%',
+        waterLevel: '81%',
+        lastVisit: '45 minutes ago',
+        animalsToday: 4,
+        description: 'New station in busy commercial area. Popular with office workers who help monitor.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+E5',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+E5'
+    },
+    'F6': {
+        name: 'Station F6',
+        location: 'University Campus',
+        coordinates: [14.6156, 120.9934],
+        status: 'Active',
+        foodLevel: '89%',
+        waterLevel: '95%',
+        lastVisit: '10 minutes ago',
+        animalsToday: 6,
+        description: 'Located on university grounds. Well-maintained by student volunteers and faculty.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+F6',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+F6'
+    },
+    'G7': {
+        name: 'Station G7',
+        location: 'Shopping District',
+        coordinates: [14.5823, 120.9689],
+        status: 'Active',
+        foodLevel: '56%',
+        waterLevel: '63%',
+        lastVisit: '25 minutes ago',
+        animalsToday: 8,
+        description: 'High-traffic shopping area. Frequent visits from both strays and community members.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+G7',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+G7'
+    },
+    'H8': {
+        name: 'Station H8',
+        location: 'Residential Complex',
+        coordinates: [14.6201, 120.9756],
+        status: 'Active',
+        foodLevel: '78%',
+        waterLevel: '72%',
+        lastVisit: '1 hour ago',
+        animalsToday: 3,
+        description: 'Quiet residential area station. Maintained by local homeowners association.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+H8',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+H8'
+    },
+    'I9': {
+        name: 'Station I9',
+        location: 'Industrial Park',
+        coordinates: [14.5756, 120.9623],
+        status: 'Needs Attention',
+        foodLevel: '31%',
+        waterLevel: '28%',
+        lastVisit: '3 hours ago',
+        animalsToday: 5,
+        description: 'Industrial area with many working cats. Requires frequent maintenance due to harsh conditions.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+I9',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+I9'
+    },
+    'J10': {
+        name: 'Station J10',
+        location: 'Waterfront Promenade',
+        coordinates: [14.5689, 120.9812],
+        status: 'Active',
+        foodLevel: '83%',
+        waterLevel: '87%',
+        lastVisit: '20 minutes ago',
+        animalsToday: 4,
+        description: 'Scenic waterfront location. Popular with tourists who often help feed the animals.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+J10',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+J10'
+    },
+    'K11': {
+        name: 'Station K11',
+        location: 'Sports Complex',
+        coordinates: [14.6134, 120.9678],
+        status: 'Active',
+        foodLevel: '92%',
+        waterLevel: '89%',
+        lastVisit: '35 minutes ago',
+        animalsToday: 2,
+        description: 'Located near sports facilities. Well-maintained by athletic club volunteers.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+K11',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+K11'
+    },
+    'L12': {
+        name: 'Station L12',
+        location: 'Hospital District',
+        coordinates: [14.5967, 120.9567],
+        status: 'Needs Attention',
+        foodLevel: '19%',
+        waterLevel: '34%',
+        lastVisit: '2 hours ago',
+        animalsToday: 6,
+        description: 'Medical district station. High animal traffic due to nearby food sources. Needs urgent refill.',
+        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+L12',
+        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+L12'
+    }
+};
 
     // Initialize map when page loads
     document.addEventListener('DOMContentLoaded', function() {
