@@ -26,6 +26,24 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+
+        /* Custom tooltip styling */
+        .custom-tooltip {
+            background: white !important;
+            border: 1px solid #ccc !important;
+            border-radius: 6px !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+            padding: 8px !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        }
+
+        .custom-tooltip::before {
+            border-top-color: #ccc !important;
+        }
+
+        .custom-tooltip::after {
+            border-top-color: white !important;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -751,8 +769,8 @@
 const stationData = {
     'A1': {
         name: 'Station A1',
-        location: 'Park Avenue & 5th Street',
-        coordinates: [14.5995, 120.9842], // Manila coordinates as example
+        location: 'Serendra A',
+        coordinates: [14.549595, 121.054277], 
         status: 'Active',
         foodLevel: '85%',
         waterLevel: '92%',
@@ -764,21 +782,21 @@ const stationData = {
     },
     'B2': {
         name: 'Station B2',
-        location: 'Community Center',
-        coordinates: [14.6042, 120.9822],
+        location: 'Serendra B',
+        coordinates: [14.549676, 121.053562],
         status: 'Active',
         foodLevel: '67%',
         waterLevel: '78%',
         lastVisit: '15 minutes ago',
         animalsToday: 3,
-        description: 'Located near the community center, this station serves both cats and dogs. Regular maintenance by local volunteers.',
+        description: 'This station serves both cats and dogs. Regular maintenance by local volunteers.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+B2',
         qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+B2'
     },
     'C3': {
         name: 'Station C3',
-        location: 'Market Square',
-        coordinates: [14.5935, 120.9775],
+        location: 'BGC High Street A',
+        coordinates: [14.550129, 121.052568],
         status: 'Needs Attention',
         foodLevel: '23%',
         waterLevel: '45%',
@@ -790,8 +808,8 @@ const stationData = {
     },
     'D4': {
         name: 'Station D4',
-        location: 'Riverside Park',
-        coordinates: [14.6089, 120.9899],
+        location: 'BGC High Street B',
+        coordinates: [14.550318, 121.051658],
         status: 'Active',
         foodLevel: '91%',
         waterLevel: '88%',
@@ -803,34 +821,34 @@ const stationData = {
     },
     'E5': {
         name: 'Station E5',
-        location: 'Oak Street Plaza',
-        coordinates: [14.5878, 120.9756],
+        location: 'BGC High Street C',
+        coordinates: [14.550618, 121.050943],
         status: 'Active',
         foodLevel: '74%',
         waterLevel: '81%',
         lastVisit: '45 minutes ago',
         animalsToday: 4,
-        description: 'New station in busy commercial area. Popular with office workers who help monitor.',
+        description: 'New station in busy commercial area. Popular with workers who help monitor.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+E5',
         qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+E5'
     },
     'F6': {
         name: 'Station F6',
-        location: 'University Campus',
-        coordinates: [14.6156, 120.9934],
+        location: 'BGC High Street D',
+        coordinates: [14.550930, 121.050068],
         status: 'Active',
         foodLevel: '89%',
         waterLevel: '95%',
         lastVisit: '10 minutes ago',
         animalsToday: 6,
-        description: 'Located on university grounds. Well-maintained by student volunteers and faculty.',
+        description: 'Well-maintained by student volunteers and faculty.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+F6',
         qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+F6'
     },
     'G7': {
         name: 'Station G7',
-        location: 'Shopping District',
-        coordinates: [14.5823, 120.9689],
+        location: 'BGC High Street E',
+        coordinates: [14.551208, 121.049279],
         status: 'Active',
         foodLevel: '56%',
         waterLevel: '63%',
@@ -842,66 +860,66 @@ const stationData = {
     },
     'H8': {
         name: 'Station H8',
-        location: 'Residential Complex',
-        coordinates: [14.6201, 120.9756],
+        location: 'BGC High Street F',
+        coordinates: [14.551402, 121.048277],
         status: 'Active',
         foodLevel: '78%',
         waterLevel: '72%',
         lastVisit: '1 hour ago',
         animalsToday: 3,
-        description: 'Quiet residential area station. Maintained by local homeowners association.',
+        description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+H8',
         qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+H8'
     },
     'I9': {
         name: 'Station I9',
-        location: 'Industrial Park',
-        coordinates: [14.5756, 120.9623],
+        location: 'Track 30th A',
+        coordinates: [14.552040, 121.051462],
         status: 'Needs Attention',
         foodLevel: '31%',
         waterLevel: '28%',
         lastVisit: '3 hours ago',
         animalsToday: 5,
-        description: 'Industrial area with many working cats. Requires frequent maintenance due to harsh conditions.',
+        description: 'Super busy area with many cats. Requires frequent maintenance due to harsh conditions.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+I9',
         qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+I9'
     },
     'J10': {
         name: 'Station J10',
-        location: 'Waterfront Promenade',
-        coordinates: [14.5689, 120.9812],
+        location: 'Track 30th B',
+        coordinates: [14.552281, 121.050376],
         status: 'Active',
         foodLevel: '83%',
         waterLevel: '87%',
         lastVisit: '20 minutes ago',
         animalsToday: 4,
-        description: 'Scenic waterfront location. Popular with tourists who often help feed the animals.',
+        description: 'Scenic park location. Popular with tourists who often help feed the animals.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+J10',
         qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+J10'
     },
     'K11': {
         name: 'Station K11',
-        location: 'Sports Complex',
-        coordinates: [14.6134, 120.9678],
+        location: 'Terra 28th A',
+        coordinates: [14.549234, 121.050570],
         status: 'Active',
         foodLevel: '92%',
         waterLevel: '89%',
         lastVisit: '35 minutes ago',
         animalsToday: 2,
-        description: 'Located near sports facilities. Well-maintained by athletic club volunteers.',
+        description: 'Frequent jogging spot of the people. Well-maintained by athletic club volunteers.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+K11',
         qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+K11'
     },
     'L12': {
         name: 'Station L12',
-        location: 'Hospital District',
-        coordinates: [14.5967, 120.9567],
+        location: 'Terra 28th B',
+        coordinates: [14.549501, 121.049473],
         status: 'Needs Attention',
         foodLevel: '19%',
         waterLevel: '34%',
         lastVisit: '2 hours ago',
         animalsToday: 6,
-        description: 'Medical district station. High animal traffic due to nearby food sources. Needs urgent refill.',
+        description: 'High animal traffic due to nearby food sources. Needs urgent refill.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+L12',
         qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+L12'
     }
@@ -922,7 +940,7 @@ const stationData = {
 
     function initializeMap() {
         // Initialize the map centered on Manila (change coordinates as needed)
-        map = L.map('map').setView([14.5995, 120.9842], 13);
+        map = L.map('map').setView([14.550767, 121.050459], 17);
 
         // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -944,33 +962,44 @@ const stationData = {
             });
 
             const marker = L.marker(station.coordinates, { icon: customIcon })
-                .addTo(map)
-                .bindPopup(`
-                    <div class="p-2">
-                        <h3 class="font-semibold text-lg">${station.name}</h3>
-                        <p class="text-sm text-gray-600 mb-2">${station.location}</p>
-                        <div class="space-y-1 text-xs">
-                            <div class="flex justify-between">
-                                <span>Status:</span>
-                                <span class="font-medium" style="color: ${markerColor}">${station.status}</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>Food:</span>
-                                <span class="font-medium">${station.foodLevel}</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>Water:</span>
-                                <span class="font-medium">${station.waterLevel}</span>
-                            </div>
-                        </div>
-                        <button onclick="showStationInfo('${stationId}')" class="mt-2 bg-purple-600 text-white px-3 py-1 rounded text-xs hover:bg-purple-700 transition">
-                            View Details
-                        </button>
+                .addTo(map);
+
+            // Create hover tooltip
+            const hoverTooltip = L.tooltip({
+                permanent: false,
+                direction: 'top',
+                offset: [0, -10],
+                className: 'custom-tooltip'
+            }).setContent(`
+                <div style="font-size: 12px; line-height: 1.3;">
+                    <div style="font-weight: bold; margin-bottom: 2px;">${station.name}</div>
+                    <div style="color: #666; margin-bottom: 3px;">${station.location}</div>
+                    <div style="display: flex; justify-content: space-between; gap: 10px;">
+                        <span>Food: ${station.foodLevel}</span>
+                        <span>Water: ${station.waterLevel}</span>
                     </div>
-                `)
-                .on('click', function() {
-                    showStationInfo(stationId);
-                });
+                    <div style="margin-top: 2px; font-size: 10px; color: #888;">
+                        Click for details
+                    </div>
+                </div>
+            `);
+
+            // Bind hover tooltip
+            marker.bindTooltip(hoverTooltip);
+
+            // Click event to open modal
+            marker.on('click', function() {
+                showStationInfo(stationId);
+            });
+
+            // Hover effects
+            marker.on('mouseover', function() {
+                this.openTooltip();
+            });
+
+            marker.on('mouseout', function() {
+                this.closeTooltip();
+            });
 
             stationMarkers[stationId] = marker;
         });
