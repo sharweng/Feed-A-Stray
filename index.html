@@ -290,151 +290,149 @@
     </section>
 
     <!-- Station Map Section -->
-    <section id="stations" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Station Locations</h2>
-            
-            <div class="grid lg:grid-cols-3 gap-8">
-                <!-- Interactive Map -->
-                <div class="lg:col-span-2">
-                    <div id="map" class="rounded-lg h-96 z-10"></div>
-                </div>
+<section id="stations" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Station Locations</h2>
+        
+        <!-- Interactive Map - Full Width -->
+        <div class="mb-8">
+            <div id="map" class="rounded-lg h-96 z-10"></div>
+        </div>
 
-                <!-- Station List -->
-                <div class="space-y-4">
-                    <h3 class="text-xl font-semibold mb-4">Station Status</h3>
-                    <div class="space-y-3">
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('A1')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station A1</h4>
-                <p class="text-sm text-gray-600">Serendra A</p>
+        <!-- Station List - Under Map -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('A1')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station A1</h4>
+                        <p class="text-xs text-gray-600">Serendra A</p>
+                    </div>
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('B2')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station B2</h4>
-                <p class="text-sm text-gray-600">Serendra B</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('B2')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station B2</h4>
+                        <p class="text-xs text-gray-600">Serendra B</p>
+                    </div>
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('C3')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station C3</h4>
-                <p class="text-sm text-gray-600">BGC High Street A</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('C3')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station C3</h4>
+                        <p class="text-xs text-gray-600">BGC High Street A</p>
+                    </div>
+                    <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('D4')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station D4</h4>
-                <p class="text-sm text-gray-600">BGC High Street B</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('D4')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station D4</h4>
+                        <p class="text-xs text-gray-600">BGC High Street B</p>
+                    </div>
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('E5')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station E5</h4>
-                <p class="text-sm text-gray-600">BGC High Street C</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('E5')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station E5</h4>
+                        <p class="text-xs text-gray-600">BGC High Street C</p>
+                    </div>
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('F6')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station F6</h4>
-                <p class="text-sm text-gray-600">BGC High Street D</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('F6')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station F6</h4>
+                        <p class="text-xs text-gray-600">BGC High Street D</p>
+                    </div>
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('G7')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station G7</h4>
-                <p class="text-sm text-gray-600">BGC High Street E</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('G7')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station G7</h4>
+                        <p class="text-xs text-gray-600">BGC High Street E</p>
+                    </div>
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('H8')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station H8</h4>
-                <p class="text-sm text-gray-600">BGC High Street F</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('H8')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station H8</h4>
+                        <p class="text-xs text-gray-600">BGC High Street F</p>
+                    </div>
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('I9')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station I9</h4>
-                <p class="text-sm text-gray-600">Track 30th A</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('I9')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station I9</h4>
+                        <p class="text-xs text-gray-600">Track 30th A</p>
+                    </div>
+                    <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('J10')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station J10</h4>
-                <p class="text-sm text-gray-600">Track 30th B</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('J10')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station J10</h4>
+                        <p class="text-xs text-gray-600">Track 30th B</p>
+                    </div>
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('K11')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station K11</h4>
-                <p class="text-sm text-gray-600">Terra 28th A</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('K11')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station K11</h4>
+                        <p class="text-xs text-gray-600">Terra 28th A</p>
+                    </div>
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-        </div>
-    </div>
-    <div class="p-4 border rounded-lg hover:bg-gray-50 cursor-pointer" onclick="showStationInfo('L12')">
-        <div class="flex items-center justify-between">
-            <div>
-                <h4 class="font-semibold">Station L12</h4>
-                <p class="text-sm text-gray-600">Terra 28th B</p>
+            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('L12')">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="font-medium text-sm">Station L12</h4>
+                        <p class="text-xs text-gray-600">Terra 28th B</p>
+                    </div>
+                    <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                </div>
             </div>
-            <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
         </div>
-    </div>
-</div>
-                    
-                    <div class="mt-6 p-4 bg-blue-50 rounded-lg">
-                        <h4 class="font-semibold text-blue-800 mb-2">Legend</h4>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex items-center">
-                                <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                                <span>Active & Well-Stocked</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
-                                <span>Needs Attention</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-                                <span>Offline/Maintenance</span>
-                            </div>
-                        </div>
+        
+        <!-- Legend -->
+        <div class="mt-6 flex justify-center">
+            <div class="bg-blue-50 rounded-lg p-4">
+                <h4 class="font-semibold text-blue-800 mb-2 text-center">Legend</h4>
+                <div class="flex space-x-6 text-sm">
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                        <span>Active & Well-Stocked</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
+                        <span>Needs Attention</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                        <span>Offline/Maintenance</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Community Board Section -->
     <section id="community" class="py-16 bg-gray-50">
@@ -546,20 +544,21 @@
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-lg shadow-lg p-6">
-                        <h3 class="text-xl font-semibold mb-4">Get Involved</h3>
-                        <div class="space-y-3">
-                            <button class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
-                                Become a Volunteer
-                            </button>
-                            <button class="w-full border border-purple-600 text-purple-600 py-2 px-4 rounded-lg hover:bg-purple-50 transition">
-                                Donate Supplies
-                            </button>
-                            <button class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition">
-                                Adopt a Pet
-                            </button>
-                        </div>
-                    </div>
+                    
+<div class="bg-white rounded-lg shadow-lg p-6">
+    <h3 class="text-xl font-semibold mb-4">Get Involved</h3>
+    <div class="space-y-3">
+        <button onclick="openVolunteerModal()" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+            Become a Volunteer
+        </button>
+        <button onclick="openDonateModal()" class="w-full border border-purple-600 text-purple-600 py-2 px-4 rounded-lg hover:bg-purple-50 transition">
+            Donate Supplies
+        </button>
+        <button onclick="openAdoptModal()" class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition">
+            Adopt a Pet
+        </button>
+    </div>
+</div>
                 </div>
             </div>
         </div>
@@ -757,6 +756,155 @@
         </div>
     </div>
 
+<!-- Volunteer Modal -->
+<div id="volunteerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-semibold">Become a Volunteer</h3>
+            <button onclick="closeVolunteerModal()" class="text-gray-500 hover:text-gray-700">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <form onsubmit="submitVolunteerForm(event)" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                <input type="text" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Enter your full name">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                <input type="email" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="your.email@example.com">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                <input type="tel" required pattern="[0-9]{10,11}" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="09123456789">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Availability</label>
+                <select class="w-full p-2 border border-gray-300 rounded-lg">
+                    <option>Weekends only</option>
+                    <option>Weekdays only</option>
+                    <option>Both weekdays and weekends</option>
+                    <option>Flexible schedule</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Experience with Animals</label>
+                <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Tell us about your experience with animals..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+                Submit Application
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Donate Modal -->
+<div id="donateModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-semibold">Donate Supplies</h3>
+            <button onclick="closeDonateModal()" class="text-gray-500 hover:text-gray-700">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <form onsubmit="submitDonateForm(event)" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
+                <input type="text" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Enter your name">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Contact Email *</label>
+                <input type="email" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="your.email@example.com">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                <input type="tel" required pattern="[0-9]{10,11}" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="09123456789">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Donation Type *</label>
+                <select required class="w-full p-2 border border-gray-300 rounded-lg">
+                    <option value="">Select donation type</option>
+                    <option>Pet Food (Dry)</option>
+                    <option>Pet Food (Wet)</option>
+                    <option>Water Bowls</option>
+                    <option>Food Bowls</option>
+                    <option>Medical Supplies</option>
+                    <option>Cleaning Supplies</option>
+                    <option>Monetary Donation</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Quantity/Amount</label>
+                <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="e.g., 5 bags, ₱1000, etc.">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+                <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Any additional information about your donation..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+                Submit Donation
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Adopt Modal -->
+<div id="adoptModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-semibold">Adopt a Pet</h3>
+            <button onclick="closeAdoptModal()" class="text-gray-500 hover:text-gray-700">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <form onsubmit="submitAdoptForm(event)" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                <input type="text" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Enter your full name">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                <input type="email" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="your.email@example.com">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                <input type="tel" required pattern="[0-9]{10,11}" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="09123456789">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Address *</label>
+                <textarea required class="w-full p-2 border border-gray-300 rounded-lg h-16" placeholder="Enter your complete address"></textarea>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Pet Type</label>
+                <select class="w-full p-2 border border-gray-300 rounded-lg">
+                    <option>Cat</option>
+                    <option>Dog</option>
+                    <option>Either</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Housing Situation *</label>
+                <select required class="w-full p-2 border border-gray-300 rounded-lg">
+                    <option value="">Select housing type</option>
+                    <option>Own House with Yard</option>
+                    <option>Own House without Yard</option>
+                    <option>Apartment/Condo</option>
+                    <option>Renting with Pet Permission</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Experience with Pets</label>
+                <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Tell us about your experience with pets..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+                Submit Application
+            </button>
+        </form>
+    </div>
+</div>
+
     <script>
     // Initialize Lucide icons
     lucide.createIcons();
@@ -778,7 +926,7 @@ const stationData = {
         animalsToday: 5,
         description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+A1',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+A1'
+        qrImage: 'images/qr/qrA.png'
     },
     'B2': {
         name: 'Station B2',
@@ -791,7 +939,7 @@ const stationData = {
         animalsToday: 3,
         description: 'This station serves both cats and dogs. Regular maintenance by local volunteers.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+B2',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+B2'
+        qrImage: 'images/qr/qrB.png'
     },
     'C3': {
         name: 'Station C3',
@@ -804,7 +952,7 @@ const stationData = {
         animalsToday: 7,
         description: 'Busy location that requires frequent refills. Popular with local stray population.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+C3',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+C3'
+        qrImage: 'images/qr/qrC.png'
     },
     'D4': {
         name: 'Station D4',
@@ -817,7 +965,7 @@ const stationData = {
         animalsToday: 2,
         description: 'Peaceful park location, recently installed. Growing popularity among local strays.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+D4',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+D4'
+        qrImage: 'images/qr/qrD.png'
     },
     'E5': {
         name: 'Station E5',
@@ -830,7 +978,7 @@ const stationData = {
         animalsToday: 4,
         description: 'New station in busy commercial area. Popular with workers who help monitor.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+E5',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+E5'
+        qrImage: 'images/qr/qrE.png'
     },
     'F6': {
         name: 'Station F6',
@@ -843,7 +991,7 @@ const stationData = {
         animalsToday: 6,
         description: 'Well-maintained by student volunteers and faculty.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+F6',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+F6'
+        qrImage: 'images/qr/qrF.png'
     },
     'G7': {
         name: 'Station G7',
@@ -856,7 +1004,7 @@ const stationData = {
         animalsToday: 8,
         description: 'High-traffic shopping area. Frequent visits from both strays and community members.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+G7',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+G7'
+        qrImage: 'images/qr/qrG.png'
     },
     'H8': {
         name: 'Station H8',
@@ -869,7 +1017,7 @@ const stationData = {
         animalsToday: 3,
         description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+H8',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+H8'
+        qrImage: 'images/qr/qrH.png'
     },
     'I9': {
         name: 'Station I9',
@@ -882,7 +1030,7 @@ const stationData = {
         animalsToday: 5,
         description: 'Super busy area with many cats. Requires frequent maintenance due to harsh conditions.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+I9',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+I9'
+        qrImage: 'images/qr/qrI.png'
     },
     'J10': {
         name: 'Station J10',
@@ -895,7 +1043,7 @@ const stationData = {
         animalsToday: 4,
         description: 'Scenic park location. Popular with tourists who often help feed the animals.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+J10',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+J10'
+        qrImage: 'images/qr/qrJ.png'
     },
     'K11': {
         name: 'Station K11',
@@ -908,7 +1056,7 @@ const stationData = {
         animalsToday: 2,
         description: 'Frequent jogging spot of the people. Well-maintained by athletic club volunteers.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+K11',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+K11'
+        qrImage: 'images/qr/qrK.png'
     },
     'L12': {
         name: 'Station L12',
@@ -921,7 +1069,7 @@ const stationData = {
         animalsToday: 6,
         description: 'High animal traffic due to nearby food sources. Needs urgent refill.',
         cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+L12',
-        qrImage: '/placeholder.svg?height=180&width=180&text=QR+Code+L12'
+        qrImage: 'images/qr/qrL.png'
     }
 };
 
@@ -1200,6 +1348,72 @@ const stationData = {
             });
         });
     });
+
+// Modal functions for Get Involved section
+function openVolunteerModal() {
+    document.getElementById('volunteerModal').classList.remove('hidden');
+    document.getElementById('volunteerModal').classList.add('flex');
+}
+
+function closeVolunteerModal() {
+    document.getElementById('volunteerModal').classList.add('hidden');
+    document.getElementById('volunteerModal').classList.remove('flex');
+}
+
+function openDonateModal() {
+    document.getElementById('donateModal').classList.remove('hidden');
+    document.getElementById('donateModal').classList.add('flex');
+}
+
+function closeDonateModal() {
+    document.getElementById('donateModal').classList.add('hidden');
+    document.getElementById('donateModal').classList.remove('flex');
+}
+
+function openAdoptModal() {
+    document.getElementById('adoptModal').classList.remove('hidden');
+    document.getElementById('adoptModal').classList.add('flex');
+}
+
+function closeAdoptModal() {
+    document.getElementById('adoptModal').classList.add('hidden');
+    document.getElementById('adoptModal').classList.remove('flex');
+}
+
+// Form submission functions
+function submitVolunteerForm(event) {
+    event.preventDefault();
+    alert('Thank you for your interest in volunteering! We will contact you within 2-3 business days.');
+    closeVolunteerModal();
+    event.target.reset();
+}
+
+function submitDonateForm(event) {
+    event.preventDefault();
+    alert('Thank you for your generous donation offer! Our team will reach out to coordinate the donation.');
+    closeDonateModal();
+    event.target.reset();
+}
+
+function submitAdoptForm(event) {
+    event.preventDefault();
+    alert('Thank you for your adoption application! We will review your application and contact you soon.');
+    closeAdoptModal();
+    event.target.reset();
+}
+
+// Close modals when clicking outside
+document.getElementById('volunteerModal').addEventListener('click', function(e) {
+    if (e.target === this) closeVolunteerModal();
+});
+
+document.getElementById('donateModal').addEventListener('click', function(e) {
+    if (e.target === this) closeDonateModal();
+});
+
+document.getElementById('adoptModal').addEventListener('click', function(e) {
+    if (e.target === this) closeAdoptModal();
+});
 </script>
 </body>
 </html>
