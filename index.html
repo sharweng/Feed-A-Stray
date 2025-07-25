@@ -6,6 +6,10 @@
     <title>FEED-A-STRAY: Open Bowl Project - Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
@@ -173,77 +177,80 @@
                         <i data-lucide="camera" class="w-5 h-5 mr-2"></i>
                         Live Camera Feed - <span id="currentStationName">Station A1</span>
                     </h3>
-                    <div class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4 overflow-hidden">
+                    <!-- In the Live Camera Feed section -->
+                    <div class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4 overflow-hidden relative">
                         <!-- Replace this div with your actual CCTV image -->
-                        <img id="cctvFeed" src="/placeholder.svg?height=300&width=500&text=CCTV+Feed+Station+A1" 
-                             alt="CCTV Feed" class="w-full h-full object-cover hidden" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <img id="cctvFeed" src="images/camera/cateat1.png" 
+                            alt="CCTV Feed" class="w-full h-full object-cover hidden" 
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         
                         <!-- Fallback placeholder (shown when no image or image fails to load) -->
                         <div id="cctvPlaceholder" class="text-center text-white flex flex-col items-center justify-center w-full h-full">
                             <i data-lucide="video" class="w-16 h-16 mx-auto mb-2 opacity-50"></i>
                             <p class="text-sm opacity-75">Live CCTV Feed</p>
                             <p class="text-xs opacity-50 mt-1">Replace src in img#cctvFeed with your camera feed URL</p>
-                            <div class="flex items-center justify-center mt-2">
-                                <div class="w-2 h-2 bg-red-500 rounded-full pulse-dot mr-2"></div>
-                                <span class="text-xs">LIVE</span>
-                            </div>
+                        </div>
+                        
+                        <!-- Live Indicator Badge -->
+                        <div class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full flex items-center">
+                            <div class="w-2 h-2 bg-white rounded-full mr-1 animate-pulse"></div>
+                            LIVE
                         </div>
                     </div>
                     <div class="flex justify-between text-sm text-gray-600">
-                        <span>Last Motion: 2 minutes ago</span>
-                        <span>Animals Detected: 2</span>
+                        <span id="lastMotion">Last Motion: 2 minutes ago</span>
+                        <span id="animalsDetected">Animals Detected: 1</span>
                     </div>
                     <div class="mt-3 flex flex-wrap gap-1">
-    <button onclick="switchCCTVStation('A1')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">A1</button>
-    <button onclick="switchCCTVStation('B2')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">B2</button>
-    <button onclick="switchCCTVStation('C3')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">C3</button>
-    <button onclick="switchCCTVStation('D4')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">D4</button>
-    <button onclick="switchCCTVStation('E5')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">E5</button>
-    <button onclick="switchCCTVStation('F6')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">F6</button>
-    <button onclick="switchCCTVStation('G7')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">G7</button>
-    <button onclick="switchCCTVStation('H8')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">H8</button>
-    <button onclick="switchCCTVStation('I9')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">I9</button>
-    <button onclick="switchCCTVStation('J10')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">J10</button>
-    <button onclick="switchCCTVStation('K11')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">K11</button>
-    <button onclick="switchCCTVStation('L12')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">L12</button>
-</div>
+                        <button onclick="switchCCTVStation('A1')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">A1</button>
+                        <button onclick="switchCCTVStation('B2')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">B2</button>
+                        <button onclick="switchCCTVStation('C3')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">C3</button>
+                        <button onclick="switchCCTVStation('D4')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">D4</button>
+                        <button onclick="switchCCTVStation('E5')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">E5</button>
+                        <button onclick="switchCCTVStation('F6')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">F6</button>
+                        <button onclick="switchCCTVStation('G7')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">G7</button>
+                        <button onclick="switchCCTVStation('H8')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">H8</button>
+                        <button onclick="switchCCTVStation('I9')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">I9</button>
+                        <button onclick="switchCCTVStation('J10')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">J10</button>
+                        <button onclick="switchCCTVStation('K11')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">K11</button>
+                        <button onclick="switchCCTVStation('L12')" class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded hover:bg-purple-200 transition">L12</button>
+                    </div>
                 </div>
 
                 <!-- Station Status -->
                 <div class="bg-white rounded-lg shadow-lg p-6">
                     <h3 class="text-xl font-semibold mb-4 flex items-center">
                         <i data-lucide="activity" class="w-5 h-5 mr-2"></i>
-                        Station Status
+                        Station Status - <span id="currentStationStatus">Station A1</span>
                     </h3>
                     <div class="space-y-4">
-                        <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                        <div id="foodContainer" class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                             <div class="flex items-center">
-                                <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                <div id="foodDot" class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
                                 <span class="font-medium">Food Level</span>
                             </div>
-                            <span class="text-green-600 font-semibold">85%</span>
+                            <span id="foodLevel" class="text-green-600 font-semibold">85%</span>
                         </div>
-                        <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                        <div id="waterContainer" class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                             <div class="flex items-center">
-                                <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                                <div id="waterDot" class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
                                 <span class="font-medium">Water Level</span>
                             </div>
-                            <span class="text-blue-600 font-semibold">92%</span>
+                            <span id="waterLevel" class="text-blue-600 font-semibold">92%</span>
                         </div>
-                        <div class="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
+                        <div id="batteryContainer" class="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
                             <div class="flex items-center">
-                                <div class="w-3 h-3 bg-orange-500 rounded-full mr-3"></div>
+                                <div id="batteryDot" class="w-3 h-3 bg-orange-500 rounded-full mr-3"></div>
                                 <span class="font-medium">Battery</span>
                             </div>
-                            <span class="text-orange-600 font-semibold">67%</span>
+                            <span id="batteryLevel" class="text-orange-600 font-semibold">67%</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                             <div class="flex items-center">
                                 <div class="w-3 h-3 bg-gray-500 rounded-full mr-3"></div>
                                 <span class="font-medium">Last Maintenance</span>
                             </div>
-                            <span class="text-gray-600 font-semibold">3 days ago</span>
+                            <span id="lastMaintenance" class="text-gray-600 font-semibold">3 days ago</span>
                         </div>
                     </div>
                 </div>
@@ -259,7 +266,7 @@
                     <div class="flex items-center justify-between p-3 border-l-4 border-green-500 bg-green-50">
                         <div class="flex items-center">
                             <i data-lucide="camera" class="w-4 h-4 mr-3 text-green-600"></i>
-                            <span class="text-sm">Motion detected at Station A1 - 2 cats feeding</span>
+                            <span class="text-sm">Motion detected at Station A1 - 1 cat feeding</span>
                         </div>
                         <span class="text-xs text-gray-500">2 min ago</span>
                     </div>
@@ -913,7 +920,7 @@
     let map;
     let stationMarkers = {};
 
-    // Station data with coordinates - Updated to include 12 stations
+    // Station data with coordinates and detailed status information
 const stationData = {
     'A1': {
         name: 'Station A1',
@@ -922,10 +929,14 @@ const stationData = {
         status: 'Active',
         foodLevel: '85%',
         waterLevel: '92%',
+        batteryLevel: '67%',
+        lastMaintenance: '3 days ago',
+        lastMotion: '2 minutes ago',
+        animalsDetected: 1, // 0 or 1
         lastVisit: '2 minutes ago',
         animalsToday: 5,
         description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+A1',
+        cctvImage: 'images/camera/cateat1.png',
         qrImage: 'images/qr/qrA.png'
     },
     'B2': {
@@ -935,10 +946,14 @@ const stationData = {
         status: 'Active',
         foodLevel: '67%',
         waterLevel: '78%',
+        batteryLevel: '89%',
+        lastMaintenance: '1 day ago',
+        lastMotion: '15 minutes ago',
+        animalsDetected: 0,
         lastVisit: '15 minutes ago',
         animalsToday: 3,
         description: 'This station serves both cats and dogs. Regular maintenance by local volunteers.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+B2',
+        cctvImage: 'images/camera/nocat.png',
         qrImage: 'images/qr/qrB.png'
     },
     'C3': {
@@ -948,10 +963,14 @@ const stationData = {
         status: 'Needs Attention',
         foodLevel: '23%',
         waterLevel: '45%',
+        batteryLevel: '34%',
+        lastMaintenance: '5 days ago',
+        lastMotion: '1 hour ago',
+        animalsDetected: 1,
         lastVisit: '1 hour ago',
         animalsToday: 7,
         description: 'Busy location that requires frequent refills. Popular with local stray population.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+C3',
+        cctvImage: 'images/camera/cateat12.png',
         qrImage: 'images/qr/qrC.png'
     },
     'D4': {
@@ -961,10 +980,14 @@ const stationData = {
         status: 'Active',
         foodLevel: '91%',
         waterLevel: '88%',
+        batteryLevel: '76%',
+        lastMaintenance: '2 days ago',
+        lastMotion: '30 minutes ago',
+        animalsDetected: 1,
         lastVisit: '30 minutes ago',
         animalsToday: 2,
         description: 'Peaceful park location, recently installed. Growing popularity among local strays.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+D4',
+        cctvImage: 'images/camera/cateat3.png',
         qrImage: 'images/qr/qrD.png'
     },
     'E5': {
@@ -974,10 +997,14 @@ const stationData = {
         status: 'Active',
         foodLevel: '74%',
         waterLevel: '81%',
+        batteryLevel: '92%',
+        lastMaintenance: '1 day ago',
+        lastMotion: '45 minutes ago',
+        animalsDetected: 0,
         lastVisit: '45 minutes ago',
         animalsToday: 4,
         description: 'New station in busy commercial area. Popular with workers who help monitor.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+E5',
+        cctvImage: 'images/camera/nocat2.png',
         qrImage: 'images/qr/qrE.png'
     },
     'F6': {
@@ -987,10 +1014,14 @@ const stationData = {
         status: 'Active',
         foodLevel: '89%',
         waterLevel: '95%',
+        batteryLevel: '88%',
+        lastMaintenance: '12 hours ago',
+        lastMotion: '10 minutes ago',
+        animalsDetected: 1,
         lastVisit: '10 minutes ago',
         animalsToday: 6,
         description: 'Well-maintained by student volunteers and faculty.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+F6',
+        cctvImage: 'images/camera/cateat4.png',
         qrImage: 'images/qr/qrF.png'
     },
     'G7': {
@@ -1000,10 +1031,14 @@ const stationData = {
         status: 'Active',
         foodLevel: '56%',
         waterLevel: '63%',
+        batteryLevel: '71%',
+        lastMaintenance: '4 days ago',
+        lastMotion: '25 minutes ago',
+        animalsDetected: 1,
         lastVisit: '25 minutes ago',
         animalsToday: 8,
         description: 'High-traffic shopping area. Frequent visits from both strays and community members.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+G7',
+        cctvImage: 'images/camera/cateat5.jpg',
         qrImage: 'images/qr/qrG.png'
     },
     'H8': {
@@ -1013,10 +1048,14 @@ const stationData = {
         status: 'Active',
         foodLevel: '78%',
         waterLevel: '72%',
+        batteryLevel: '65%',
+        lastMaintenance: '2 days ago',
+        lastMotion: '1 hour ago',
+        animalsDetected: 0,
         lastVisit: '1 hour ago',
         animalsToday: 3,
         description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+H8',
+        cctvImage: 'images/camera/nocat3.png',
         qrImage: 'images/qr/qrH.png'
     },
     'I9': {
@@ -1026,10 +1065,14 @@ const stationData = {
         status: 'Needs Attention',
         foodLevel: '31%',
         waterLevel: '28%',
+        batteryLevel: '43%',
+        lastMaintenance: '7 days ago',
+        lastMotion: '3 hours ago',
+        animalsDetected: 1,
         lastVisit: '3 hours ago',
         animalsToday: 5,
         description: 'Super busy area with many cats. Requires frequent maintenance due to harsh conditions.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+I9',
+        cctvImage: 'images/camera/cateat6.webp',
         qrImage: 'images/qr/qrI.png'
     },
     'J10': {
@@ -1039,10 +1082,14 @@ const stationData = {
         status: 'Active',
         foodLevel: '83%',
         waterLevel: '87%',
+        batteryLevel: '79%',
+        lastMaintenance: '1 day ago',
+        lastMotion: '20 minutes ago',
+        animalsDetected: 1,
         lastVisit: '20 minutes ago',
         animalsToday: 4,
         description: 'Scenic park location. Popular with tourists who often help feed the animals.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+J10',
+        cctvImage: 'images/camera/cateat11.png',
         qrImage: 'images/qr/qrJ.png'
     },
     'K11': {
@@ -1052,10 +1099,14 @@ const stationData = {
         status: 'Active',
         foodLevel: '92%',
         waterLevel: '89%',
+        batteryLevel: '94%',
+        lastMaintenance: '6 hours ago',
+        lastMotion: '35 minutes ago',
+        animalsDetected: 1,
         lastVisit: '35 minutes ago',
         animalsToday: 2,
         description: 'Frequent jogging spot of the people. Well-maintained by athletic club volunteers.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+K11',
+        cctvImage: 'images/camera/cateat10.png',
         qrImage: 'images/qr/qrK.png'
     },
     'L12': {
@@ -1065,10 +1116,14 @@ const stationData = {
         status: 'Needs Attention',
         foodLevel: '19%',
         waterLevel: '34%',
+        batteryLevel: '52%',
+        lastMaintenance: '6 days ago',
+        lastMotion: '2 hours ago',
+        animalsDetected: 1,
         lastVisit: '2 hours ago',
         animalsToday: 6,
         description: 'High animal traffic due to nearby food sources. Needs urgent refill.',
-        cctvImage: '/placeholder.svg?height=300&width=500&text=CCTV+Station+L12',
+        cctvImage: 'images/camera/cateat9.jpeg',
         qrImage: 'images/qr/qrL.png'
     }
 };
@@ -1077,6 +1132,8 @@ const stationData = {
     document.addEventListener('DOMContentLoaded', function() {
         initializeMap();
         updateQRCode(); // Initialize QR code
+
+        switchCCTVStation('A1');
         
         // Try to load the first CCTV image
         const cctvImg = document.getElementById('cctvFeed');
@@ -1178,14 +1235,17 @@ const stationData = {
         legend.addTo(map);
     }
 
-    // Function to switch CCTV station
+    // Function to switch CCTV station with FIXED color coding
     function switchCCTVStation(stationId) {
         const station = stationData[stationId];
         const cctvImg = document.getElementById('cctvFeed');
         const cctvPlaceholder = document.getElementById('cctvPlaceholder');
         const stationName = document.getElementById('currentStationName');
+        const stationStatus = document.getElementById('currentStationStatus');
         
+        // Update station names
         stationName.textContent = station.name;
+        stationStatus.textContent = station.name;
         
         // Update CCTV image source - REPLACE THESE URLs WITH YOUR ACTUAL CCTV IMAGES
         cctvImg.src = station.cctvImage;
@@ -1196,6 +1256,89 @@ const stationData = {
         
         // Update placeholder text
         cctvPlaceholder.querySelector('p').textContent = `Live CCTV Feed - ${station.name}`;
+        
+        // Update station status information
+        document.getElementById('foodLevel').textContent = station.foodLevel;
+        document.getElementById('waterLevel').textContent = station.waterLevel;
+        document.getElementById('batteryLevel').textContent = station.batteryLevel;
+        document.getElementById('lastMaintenance').textContent = station.lastMaintenance;
+        document.getElementById('lastMotion').textContent = `Last Motion: ${station.lastMotion}`;
+        document.getElementById('animalsDetected').textContent = `Animals Detected: ${station.animalsDetected}`;
+        
+        // FIXED: Update color coding using classList methods instead of replacing className
+        const foodLevelElement = document.getElementById('foodLevel');
+        const waterLevelElement = document.getElementById('waterLevel');
+        const batteryLevelElement = document.getElementById('batteryLevel');
+        
+        const foodContainer = document.getElementById('foodContainer');
+        const waterContainer = document.getElementById('waterContainer');
+        const batteryContainer = document.getElementById('batteryContainer');
+        
+        const foodDot = document.getElementById('foodDot');
+        const waterDot = document.getElementById('waterDot');
+        const batteryDot = document.getElementById('batteryDot');
+
+        // Food level color coding
+        const foodPercent = parseInt(station.foodLevel);
+        
+        // Reset food classes
+        foodLevelElement.className = 'font-semibold';
+        foodContainer.className = 'flex items-center justify-between p-3 rounded-lg';
+        foodDot.className = 'w-3 h-3 rounded-full mr-3';
+        
+        if (foodPercent < 30) {
+            foodLevelElement.classList.add('text-red-600');
+            foodContainer.classList.add('bg-red-50');
+            foodDot.classList.add('bg-red-500');
+        } else if (foodPercent < 60) {
+            foodLevelElement.classList.add('text-orange-600');
+            foodContainer.classList.add('bg-orange-50');
+            foodDot.classList.add('bg-orange-500');
+        } else {
+            foodLevelElement.classList.add('text-green-600');
+            foodContainer.classList.add('bg-green-50');
+            foodDot.classList.add('bg-green-500');
+        }
+
+        // Water level color coding
+        const waterPercent = parseInt(station.waterLevel);
+        
+        // Reset water classes
+        waterLevelElement.className = 'font-semibold';
+        waterContainer.className = 'flex items-center justify-between p-3 rounded-lg';
+        waterDot.className = 'w-3 h-3 rounded-full mr-3';
+        
+        if (waterPercent < 30) {
+            waterLevelElement.classList.add('text-red-600');
+            waterContainer.classList.add('bg-red-50');
+            waterDot.classList.add('bg-red-500');
+        } else if (waterPercent < 60) {
+            waterLevelElement.classList.add('text-orange-600');
+            waterContainer.classList.add('bg-orange-50');
+            waterDot.classList.add('bg-orange-500');
+        } else {
+            waterLevelElement.classList.add('text-blue-600');
+            waterContainer.classList.add('bg-blue-50');
+            waterDot.classList.add('bg-blue-500');
+        }
+
+        // Battery level color coding
+        const batteryPercent = parseInt(station.batteryLevel);
+        
+        // Reset battery classes
+        batteryLevelElement.className = 'font-semibold';
+        batteryContainer.className = 'flex items-center justify-between p-3 rounded-lg';
+        batteryDot.className = 'w-3 h-3 rounded-full mr-3';
+        
+        if (batteryPercent < 30) {
+            batteryLevelElement.classList.add('text-red-600');
+            batteryContainer.classList.add('bg-red-50');
+            batteryDot.classList.add('bg-red-500');
+        } else {
+            batteryLevelElement.classList.add('text-orange-600');
+            batteryContainer.classList.add('bg-orange-50');
+            batteryDot.classList.add('bg-orange-500');
+        }
         
         cctvImg.onload = function() {
             this.style.display = 'block';
@@ -1417,3 +1560,12 @@ document.getElementById('adoptModal').addEventListener('click', function(e) {
 </script>
 </body>
 </html>
+
+<!-- Now the station status cards will maintain their proper layout and alignment when switching between stations! The key fix was:
+
+1. **Added specific IDs** to the containers and dots (`foodContainer`, `waterContainer`, `batteryContainer`, `foodDot`, `waterDot`, `batteryDot`)
+2. **Used `classList` methods** instead of replacing the entire `className`
+3. **Reset classes first** before adding new ones to ensure clean state transitions
+4. **Maintained the original structure** of the flex layout with proper padding and spacing
+
+The cards will now properly show different colors based on the levels while keeping their card-like appearance intact! -->
