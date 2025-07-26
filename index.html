@@ -30,7 +30,6 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-
         /* Custom tooltip styling */
         .custom-tooltip {
             background: white !important;
@@ -40,35 +39,120 @@
             padding: 8px !important;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
         }
-
         .custom-tooltip::before {
             border-top-color: #ccc !important;
         }
-
         .custom-tooltip::after {
             border-top-color: white !important;
+        }
+        
+        /* Sticky Navigation Styles */
+        .nav-sticky {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Active navigation link */
+        .nav-link-active {
+            color: #7c3aed !important;
+            font-weight: 600;
+        }
+        
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .scroll-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Section padding for sticky nav */
+        section {
+            scroll-margin-top: 80px;
         }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+    <!-- Enhanced Sticky Navigation -->
+    <nav id="mainNav" class="bg-white shadow-lg fixed w-full top-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-2">
                     <i data-lucide="heart" class="w-8 h-8 text-purple-600"></i>
                     <span class="text-2xl font-bold text-gray-800">FEED-A-STRAY</span>
                 </div>
+                
+                <!-- Desktop Navigation -->
                 <div class="hidden md:flex space-x-6">
-                    <a href="#home" class="text-gray-600 hover:text-purple-600 transition">Home</a>
-                    <a href="#dashboard" class="text-gray-600 hover:text-purple-600 transition">Dashboard</a>
-                    <a href="#stations" class="text-gray-600 hover:text-purple-600 transition">Stations</a>
-                    <a href="#community" class="text-gray-600 hover:text-purple-600 transition">Community</a>
-                    <a href="#report" class="text-gray-600 hover:text-purple-600 transition">Report</a>
+                    <a href="#home" class="nav-link text-gray-600 hover:text-purple-600 transition duration-300">Home</a>
+                    <a href="#dashboard" class="nav-link text-gray-600 hover:text-purple-600 transition duration-300">Dashboard</a>
+                    <a href="#stations" class="nav-link text-gray-600 hover:text-purple-600 transition duration-300">Stations</a>
+                    <a href="#community" class="nav-link text-gray-600 hover:text-purple-600 transition duration-300">Community</a>
+                    <a href="#animals" class="nav-link text-gray-600 hover:text-purple-600 transition duration-300">Animals</a>
+                    <a href="#report" class="nav-link text-gray-600 hover:text-purple-600 transition duration-300">Report</a>
                 </div>
+                
+                <!-- Mobile Menu Button -->
                 <button class="md:hidden" onclick="toggleMobileMenu()">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
+                    <i data-lucide="menu" class="w-6 h-6" id="menuIcon"></i>
+                    <i data-lucide="x" class="w-6 h-6 hidden" id="closeIcon"></i>
                 </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden fixed top-0 right-0 h-full w-64 bg-white shadow-xl z-50">
+            <div class="p-6 pt-20">
+                <div class="space-y-4">
+                    <a href="#home" class="block nav-link text-gray-600 hover:text-purple-600 transition duration-300 py-2" onclick="closeMobileMenu()">Home</a>
+                    <a href="#dashboard" class="block nav-link text-gray-600 hover:text-purple-600 transition duration-300 py-2" onclick="closeMobileMenu()">Dashboard</a>
+                    <a href="#stations" class="block nav-link text-gray-600 hover:text-purple-600 transition duration-300 py-2" onclick="closeMobileMenu()">Stations</a>
+                    <a href="#community" class="block nav-link text-gray-600 hover:text-purple-600 transition duration-300 py-2" onclick="closeMobileMenu()">Community</a>
+                    <a href="#animals" class="block nav-link text-gray-600 hover:text-purple-600 transition duration-300 py-2" onclick="closeMobileMenu()">Animals</a>
+                    <a href="#report" class="block nav-link text-gray-600 hover:text-purple-600 transition duration-300 py-2" onclick="closeMobileMenu()">Report</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -177,21 +261,17 @@
                         <i data-lucide="camera" class="w-5 h-5 mr-2"></i>
                         Live Camera Feed - <span id="currentStationName">Station A1</span>
                     </h3>
-                    <!-- In the Live Camera Feed section -->
                     <div class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center mb-4 overflow-hidden relative">
-                        <!-- Replace this div with your actual CCTV image -->
-                        <img id="cctvFeed" src="images/camera/cateat1.png" 
-                            alt="CCTV Feed" class="w-full h-full object-cover hidden" 
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <img id="cctvFeed" src="images/camera/cateat1.png"
+                             alt="CCTV Feed" class="w-full h-full object-cover hidden"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         
-                        <!-- Fallback placeholder (shown when no image or image fails to load) -->
                         <div id="cctvPlaceholder" class="text-center text-white flex flex-col items-center justify-center w-full h-full">
                             <i data-lucide="video" class="w-16 h-16 mx-auto mb-2 opacity-50"></i>
                             <p class="text-sm opacity-75">Live CCTV Feed</p>
                             <p class="text-xs opacity-50 mt-1">Replace src in img#cctvFeed with your camera feed URL</p>
                         </div>
                         
-                        <!-- Live Indicator Badge -->
                         <div class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full flex items-center">
                             <div class="w-2 h-2 bg-white rounded-full mr-1 animate-pulse"></div>
                             LIVE
@@ -297,149 +377,149 @@
     </section>
 
     <!-- Station Map Section -->
-<section id="stations" class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Station Locations</h2>
-        
-        <!-- Interactive Map - Full Width -->
-        <div class="mb-8">
-            <div id="map" class="rounded-lg h-96 z-10"></div>
-        </div>
+    <section id="stations" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Station Locations</h2>
+            
+            <!-- Interactive Map - Full Width -->
+            <div class="mb-8">
+                <div id="map" class="rounded-lg h-96 z-10"></div>
+            </div>
 
-        <!-- Station List - Under Map -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('A1')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station A1</h4>
-                        <p class="text-xs text-gray-600">Serendra A</p>
+            <!-- Station List - Under Map -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('A1')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station A1</h4>
+                            <p class="text-xs text-gray-600">Serendra A</p>
+                        </div>
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
                     </div>
-                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('B2')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station B2</h4>
+                            <p class="text-xs text-gray-600">Serendra B</p>
+                        </div>
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('C3')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station C3</h4>
+                            <p class="text-xs text-gray-600">BGC High Street A</p>
+                        </div>
+                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('D4')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station D4</h4>
+                            <p class="text-xs text-gray-600">BGC High Street B</p>
+                        </div>
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('E5')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station E5</h4>
+                            <p class="text-xs text-gray-600">BGC High Street C</p>
+                        </div>
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('F6')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station F6</h4>
+                            <p class="text-xs text-gray-600">BGC High Street D</p>
+                        </div>
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('G7')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station G7</h4>
+                            <p class="text-xs text-gray-600">BGC High Street E</p>
+                        </div>
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('H8')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station H8</h4>
+                            <p class="text-xs text-gray-600">BGC High Street F</p>
+                        </div>
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('I9')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station I9</h4>
+                            <p class="text-xs text-gray-600">Track 30th A</p>
+                        </div>
+                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('J10')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station J10</h4>
+                            <p class="text-xs text-gray-600">Track 30th B</p>
+                        </div>
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('K11')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station K11</h4>
+                            <p class="text-xs text-gray-600">Terra 28th A</p>
+                        </div>
+                        <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('L12')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-sm">Station L12</h4>
+                            <p class="text-xs text-gray-600">Terra 28th B</p>
+                        </div>
+                        <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    </div>
                 </div>
             </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('B2')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station B2</h4>
-                        <p class="text-xs text-gray-600">Serendra B</p>
+            
+            <!-- Legend -->
+            <div class="mt-6 flex justify-center">
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-800 mb-2 text-center">Legend</h4>
+                    <div class="flex space-x-6 text-sm">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                            <span>Active & Well-Stocked</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
+                            <span>Needs Attention</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                            <span>Offline/Maintenance</span>
+                        </div>
                     </div>
-                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                </div>
-            </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('C3')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station C3</h4>
-                        <p class="text-xs text-gray-600">BGC High Street A</p>
-                    </div>
-                    <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
-                </div>
-            </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('D4')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station D4</h4>
-                        <p class="text-xs text-gray-600">BGC High Street B</p>
-                    </div>
-                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                </div>
-            </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('E5')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station E5</h4>
-                        <p class="text-xs text-gray-600">BGC High Street C</p>
-                    </div>
-                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                </div>
-            </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('F6')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station F6</h4>
-                        <p class="text-xs text-gray-600">BGC High Street D</p>
-                    </div>
-                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                </div>
-            </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('G7')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station G7</h4>
-                        <p class="text-xs text-gray-600">BGC High Street E</p>
-                    </div>
-                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                </div>
-            </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('H8')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station H8</h4>
-                        <p class="text-xs text-gray-600">BGC High Street F</p>
-                    </div>
-                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                </div>
-            </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('I9')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station I9</h4>
-                        <p class="text-xs text-gray-600">Track 30th A</p>
-                    </div>
-                    <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
-                </div>
-            </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('J10')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station J10</h4>
-                        <p class="text-xs text-gray-600">Track 30th B</p>
-                    </div>
-                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                </div>
-            </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('K11')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station K11</h4>
-                        <p class="text-xs text-gray-600">Terra 28th A</p>
-                    </div>
-                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
-                </div>
-            </div>
-            <div class="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer transition" onclick="showStationInfo('L12')">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h4 class="font-medium text-sm">Station L12</h4>
-                        <p class="text-xs text-gray-600">Terra 28th B</p>
-                    </div>
-                    <div class="w-2 h-2 bg-orange-500 rounded-full"></div>
                 </div>
             </div>
         </div>
-        
-        <!-- Legend -->
-        <div class="mt-6 flex justify-center">
-            <div class="bg-blue-50 rounded-lg p-4">
-                <h4 class="font-semibold text-blue-800 mb-2 text-center">Legend</h4>
-                <div class="flex space-x-6 text-sm">
-                    <div class="flex items-center">
-                        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                        <span>Active & Well-Stocked</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
-                        <span>Needs Attention</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-                        <span>Offline/Maintenance</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Community Board Section -->
     <section id="community" class="py-16 bg-gray-50">
@@ -453,56 +533,56 @@
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
                             <div class="h-48 bg-gray-300 flex items-center justify-center">
-                                <i data-lucide="image" class="w-16 h-16 text-gray-500"></i>
+                                <img src="images/orange-tabby.jpg" alt="orange tabby cat" class="w-full h-full object-cover">
                             </div>
                             <div class="p-4">
                                 <h4 class="font-semibold text-lg mb-2">Whiskers</h4>
                                 <p class="text-sm text-gray-600 mb-3">Orange tabby cat, regular visitor at Station A1. Very friendly and appears healthy.</p>
                                 <div class="flex justify-between items-center">
                                     <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Available for Adoption</span>
-                                    <button class="text-purple-600 hover:text-purple-800 text-sm font-medium">Learn More</button>
+                                    <button onclick="openAnimalModal('whiskers')" class="text-purple-600 hover:text-purple-800 text-sm font-medium">Learn More</button>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
                             <div class="h-48 bg-gray-300 flex items-center justify-center">
-                                <i data-lucide="image" class="w-16 h-16 text-gray-500"></i>
+                                <img src="images/black-dog.jpg" alt="black dog" class="w-full h-full object-cover">
                             </div>
                             <div class="p-4">
                                 <h4 class="font-semibold text-lg mb-2">Shadow</h4>
                                 <p class="text-sm text-gray-600 mb-3">Black dog, visits Station B2 nightly. Shy but appears to be gaining weight.</p>
                                 <div class="flex justify-between items-center">
                                     <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Under Observation</span>
-                                    <button class="text-purple-600 hover:text-purple-800 text-sm font-medium">Learn More</button>
+                                    <button onclick="openAnimalModal('shadow')" class="text-purple-600 hover:text-purple-800 text-sm font-medium">Learn More</button>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
                             <div class="h-48 bg-gray-300 flex items-center justify-center">
-                                <i data-lucide="image" class="w-16 h-16 text-gray-500"></i>
+                                <img src="images/calico-cat.jpg" alt="calico cat" class="w-full h-full object-cover">
                             </div>
                             <div class="p-4">
                                 <h4 class="font-semibold text-lg mb-2">Patches</h4>
                                 <p class="text-sm text-gray-600 mb-3">Calico cat with distinctive markings. Mother to 3 kittens, needs TNR assistance.</p>
                                 <div class="flex justify-between items-center">
                                     <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Needs TNR</span>
-                                    <button class="text-purple-600 hover:text-purple-800 text-sm font-medium">Learn More</button>
+                                    <button onclick="openAnimalModal('patches')" class="text-purple-600 hover:text-purple-800 text-sm font-medium">Learn More</button>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
                             <div class="h-48 bg-gray-300 flex items-center justify-center">
-                                <i data-lucide="image" class="w-16 h-16 text-gray-500"></i>
+                                <img src="images/golden-retriever.jpg" alt="golden retriever" class="w-full h-full object-cover">
                             </div>
                             <div class="p-4">
                                 <h4 class="font-semibold text-lg mb-2">Buddy</h4>
                                 <p class="text-sm text-gray-600 mb-3">Golden retriever mix, very social. Recently started visiting Station D4.</p>
                                 <div class="flex justify-between items-center">
                                     <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">New Visitor</span>
-                                    <button class="text-purple-600 hover:text-purple-800 text-sm font-medium">Learn More</button>
+                                    <button onclick="openAnimalModal('buddy')" class="text-purple-600 hover:text-purple-800 text-sm font-medium">Learn More</button>
                                 </div>
                             </div>
                         </div>
@@ -551,21 +631,292 @@
                         </div>
                     </div>
 
-                    
-<div class="bg-white rounded-lg shadow-lg p-6">
-    <h3 class="text-xl font-semibold mb-4">Get Involved</h3>
-    <div class="space-y-3">
-        <button onclick="openVolunteerModal()" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
-            Become a Volunteer
-        </button>
-        <button onclick="openDonateModal()" class="w-full border border-purple-600 text-purple-600 py-2 px-4 rounded-lg hover:bg-purple-50 transition">
-            Donate Supplies
-        </button>
-        <button onclick="openAdoptModal()" class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition">
-            Adopt a Pet
-        </button>
-    </div>
-</div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold mb-4">Get Involved</h3>
+                        <div class="space-y-3">
+                            <button onclick="openVolunteerModal()" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+                                Become a Volunteer
+                            </button>
+                            <button onclick="openDonateModal()" class="w-full border border-purple-600 text-purple-600 py-2 px-4 rounded-lg hover:bg-purple-50 transition">
+                                Donate Supplies
+                            </button>
+                            <button onclick="openAdoptModal()" class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition">
+                                Adopt a Pet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Animals Section -->
+    <section id="animals" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Animal Gallery & Community Engagement</h2>
+            
+            <!-- Tab Navigation -->
+            <div class="flex justify-center mb-8">
+                <div class="bg-gray-100 p-1 rounded-lg">
+                    <button onclick="switchTab('gallery')" id="galleryTab" class="px-6 py-2 rounded-md font-medium transition bg-white text-purple-600 shadow-sm">
+                        Photo Gallery
+                    </button>
+                    <button onclick="switchTab('naming')" id="namingTab" class="px-6 py-2 rounded-md font-medium transition text-gray-600 hover:text-purple-600">
+                        Name Suggestions
+                    </button>
+                    <button onclick="switchTab('adoption')" id="adoptionTab" class="px-6 py-2 rounded-md font-medium transition text-gray-600 hover:text-purple-600">
+                        Adoption Inquiries
+                    </button>
+                    <button onclick="switchTab('updates')" id="updatesTab" class="px-6 py-2 rounded-md font-medium transition text-gray-600 hover:text-purple-600">
+                        Monthly Updates
+                    </button>
+                </div>
+            </div>
+
+            <!-- Photo Gallery Tab -->
+            <div id="galleryContent" class="tab-content">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                        <div class="h-64 bg-gradient-to-br from-orange-200 to-orange-300 flex items-center justify-center">
+                            <img src="images/orange-tabby.jpg" alt="orange tabby cat" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-semibold mb-2">Orange Tabby - Station A1</h4>
+                            <p class="text-sm text-gray-600 mb-3">Friendly cat, visits daily around 3 PM</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Healthy</span>
+                                <button onclick="openPhotoModal('orange-tabby')" class="text-purple-600 hover:text-purple-800 text-sm">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                        <div class="h-64 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                            <img src="images/black-dog.jpg" alt="black dog" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-semibold mb-2">Black Dog - Station B2</h4>
+                            <p class="text-sm text-gray-600 mb-3">Shy but gentle, needs socialization</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Monitoring</span>
+                                <button onclick="openPhotoModal('black-dog')" class="text-purple-600 hover:text-purple-800 text-sm">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                        <div class="h-64 bg-gradient-to-br from-amber-200 to-amber-400 flex items-center justify-center">
+                            <img src="images/calico-cat.jpg" alt="calico cat" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-semibold mb-2">Calico Family - Station C3</h4>
+                            <p class="text-sm text-gray-600 mb-3">Mother with 3 kittens, needs TNR</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Urgent</span>
+                                <button onclick="openPhotoModal('calico-family')" class="text-purple-600 hover:text-purple-800 text-sm">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="openUploadModal()" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition">
+                        <i data-lucide="camera" class="w-5 h-5 inline mr-2"></i>
+                        Upload Animal Photo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Name Suggestions Tab -->
+            <div id="namingContent" class="tab-content hidden">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-4">Suggest Names for Our Animals</h3>
+                    <form onsubmit="submitNameSuggestion(event)" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Animal</label>
+                                <select class="w-full p-2 border border-gray-300 rounded-lg">
+                                    <option>Orange Tabby - Station A1</option>
+                                    <option>Black Dog - Station B2</option>
+                                    <option>Calico Mother - Station C3</option>
+                                    <option>Golden Mix - Station D4</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Suggested Name</label>
+                                <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Enter name suggestion">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Reason for Name</label>
+                            <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Why do you think this name fits?"></textarea>
+                        </div>
+                        <button type="submit" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+                            Submit Suggestion
+                        </button>
+                    </form>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">Recent Name Suggestions</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-medium">Sunny</h4>
+                                    <p class="text-sm text-gray-600">For Orange Tabby - Station A1</p>
+                                    <p class="text-xs text-gray-500 mt-1">"Because of his bright orange color and sunny personality"</p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="text-green-600 hover:text-green-800">
+                                        <i data-lucide="thumbs-up" class="w-4 h-4"></i>
+                                    </button>
+                                    <span class="text-sm text-gray-500">12</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-medium">Midnight</h4>
+                                    <p class="text-sm text-gray-600">For Black Dog - Station B2</p>
+                                    <p class="text-xs text-gray-500 mt-1">"Visits at night and has beautiful black fur"</p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="text-green-600 hover:text-green-800">
+                                        <i data-lucide="thumbs-up" class="w-4 h-4"></i>
+                                    </button>
+                                    <span class="text-sm text-gray-500">8</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adoption Inquiries Tab -->
+            <div id="adoptionContent" class="tab-content hidden">
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-4">Express Adoption Interest</h3>
+                    <form onsubmit="submitAdoptionInquiry(event)" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                                <input type="text" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Full name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="your.email@example.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Animal of Interest</label>
+                            <select required class="w-full p-2 border border-gray-300 rounded-lg">
+                                <option value="">Select an animal</option>
+                                <option>Whiskers - Orange Tabby (Station A1)</option>
+                                <option>Shadow - Black Dog (Station B2)</option>
+                                <option>Buddy - Golden Mix (Station D4)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Experience with Pets</label>
+                            <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Tell us about your experience with pets..."></textarea>
+                        </div>
+                        <button type="submit" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+                            Submit Inquiry
+                        </button>
+                    </form>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">Recent Adoption Success Stories</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4 p-4 bg-green-50 rounded-lg">
+                            <div class="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center">
+                                <i data-lucide="heart" class="w-8 h-8 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-green-800">Mittens Found Her Home!</h4>
+                                <p class="text-sm text-green-700">Adopted by the Johnson family last week. She's doing great!</p>
+                                <p class="text-xs text-green-600 mt-1">2 days ago</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-lg">
+                            <div class="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center">
+                                <i data-lucide="heart" class="w-8 h-8 text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-blue-800">Max Gets a Second Chance</h4>
+                                <p class="text-sm text-blue-700">Senior dog adopted by a loving retired couple.</p>
+                                <p class="text-xs text-blue-600 mt-1">1 week ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Updates Tab -->
+            <div id="updatesContent" class="tab-content hidden">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold mb-4">This Month's Statistics</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                                <span class="font-medium">Total Animals Fed</span>
+                                <span class="text-2xl font-bold text-blue-600">1,247</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                                <span class="font-medium">Successful Adoptions</span>
+                                <span class="text-2xl font-bold text-green-600">8</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
+                                <span class="font-medium">New Volunteers</span>
+                                <span class="text-2xl font-bold text-purple-600">15</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
+                                <span class="font-medium">TNR Procedures</span>
+                                <span class="text-2xl font-bold text-orange-600">12</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold mb-4">Community Highlights</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-green-500 pl-4">
+                                <h4 class="font-medium text-green-800">Volunteer Appreciation</h4>
+                                <p class="text-sm text-gray-600">Special thanks to Maria Santos for her daily station maintenance!</p>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-medium text-blue-800">New Partnership</h4>
+                                <p class="text-sm text-gray-600">Local vet clinic now provides free health checks for our animals.</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-medium text-purple-800">Expansion Update</h4>
+                                <p class="text-sm text-gray-600">Two new feeding stations planned for next month!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4">Photo of the Month</h3>
+                    <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+                        <div class="w-full md:w-64 h-48 bg-gradient-to-br from-orange-200 to-orange-400 rounded-lg flex items-center justify-center">
+                            <img src="images/many-cat.jpg" alt="whisker with friends" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-lg mb-2">Whiskers and Friends</h4>
+                            <p class="text-gray-600 mb-3">
+                                This heartwarming photo shows Whiskers sharing his meal with two other cats at Station A1. 
+                                It perfectly captures the community spirit we're trying to foster - not just among humans, 
+                                but among the animals themselves.
+                            </p>
+                            <p class="text-sm text-gray-500">Captured by volunteer photographer John Doe</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -582,12 +933,10 @@
                     <h3 class="text-xl font-semibold mb-4">Scan QR Code at Station</h3>
                     <div class="bg-gray-100 p-8 rounded-lg mb-4">
                         <div class="w-48 h-48 bg-white border-2 border-gray-300 mx-auto flex items-center justify-center overflow-hidden">
-                            <!-- Replace src with your actual QR code images -->
-                            <img id="qrCodeImage" src="/placeholder.svg?height=180&width=180&text=QR+Code+A1" 
-                                 alt="QR Code" class="w-full h-full object-contain hidden"
+                            <img id="qrCodeImage" src="/placeholder.svg?height=180&width=180&text=QR+Code+A1"
+                                  alt="QR Code" class="w-full h-full object-contain hidden"
                                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             
-                            <!-- Fallback placeholder -->
                             <div id="qrPlaceholder" class="text-center flex flex-col items-center justify-center w-full h-full">
                                 <i data-lucide="qr-code" class="w-16 h-16 mx-auto mb-2 text-gray-400"></i>
                                 <p class="text-sm text-gray-600">QR Code</p>
@@ -605,19 +954,19 @@
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Station Location</label>
                             <select id="stationSelect" class="w-full p-2 border border-gray-300 rounded-lg" onchange="updateQRCode()">
-    <option value="A1">Station A1 - Serendra A</option>
-    <option value="B2">Station B2 - Serendra B</option>
-    <option value="C3">Station C3 - BGC High Street A</option>
-    <option value="D4">Station D4 - BGC High Street B</option>
-    <option value="E5">Station E5 - BGC High Street C</option>
-    <option value="F6">Station F6 - BGC High Street D</option>
-    <option value="G7">Station G7 - BGC High Street E</option>
-    <option value="H8">Station H8 - BGC High Street F</option>
-    <option value="I9">Station I9 - Track 30th A</option>
-    <option value="J10">Station J10 - Track 30th B</option>
-    <option value="K11">Station K11 - Terra 28th A</option>
-    <option value="L12">Station L12 - Terra 20th B</option>
-</select>
+                                <option value="A1">Station A1 - Serendra A</option>
+                                <option value="B2">Station B2 - Serendra B</option>
+                                <option value="C3">Station C3 - BGC High Street A</option>
+                                <option value="D4">Station D4 - BGC High Street B</option>
+                                <option value="E5">Station E5 - BGC High Street C</option>
+                                <option value="F6">Station F6 - BGC High Street D</option>
+                                <option value="G7">Station G7 - BGC High Street E</option>
+                                <option value="H8">Station H8 - BGC High Street F</option>
+                                <option value="I9">Station I9 - Track 30th A</option>
+                                <option value="J10">Station J10 - Track 30th B</option>
+                                <option value="K11">Station K11 - Terra 28th A</option>
+                                <option value="L12">Station L12 - Terra 28th B</option>
+                            </select>
                         </div>
                         
                         <div>
@@ -748,6 +1097,11 @@
         </div>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
+
     <!-- Station Info Modal -->
     <div id="stationModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
@@ -763,809 +1117,1080 @@
         </div>
     </div>
 
-<!-- Volunteer Modal -->
-<div id="volunteerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-semibold">Become a Volunteer</h3>
-            <button onclick="closeVolunteerModal()" class="text-gray-500 hover:text-gray-700">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
+    <!-- Volunteer Modal -->
+    <div id="volunteerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">Become a Volunteer</h3>
+                <button onclick="closeVolunteerModal()" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <form onsubmit="submitVolunteerForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                    <input type="text" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Enter your full name">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                    <input type="email" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="your.email@example.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                    <input type="tel" required pattern="[0-9]{10,11}" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="09123456789">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Availability</label>
+                    <select class="w-full p-2 border border-gray-300 rounded-lg">
+                        <option>Weekends only</option>
+                        <option>Weekdays only</option>
+                        <option>Both weekdays and weekends</option>
+                        <option>Flexible schedule</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Experience with Animals</label>
+                    <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Tell us about your experience with animals..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+                    Submit Application
+                </button>
+            </form>
         </div>
-        <form onsubmit="submitVolunteerForm(event)" class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
-                <input type="text" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Enter your full name">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-                <input type="email" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="your.email@example.com">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
-                <input type="tel" required pattern="[0-9]{10,11}" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="09123456789">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Availability</label>
-                <select class="w-full p-2 border border-gray-300 rounded-lg">
-                    <option>Weekends only</option>
-                    <option>Weekdays only</option>
-                    <option>Both weekdays and weekends</option>
-                    <option>Flexible schedule</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Experience with Animals</label>
-                <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Tell us about your experience with animals..."></textarea>
-            </div>
-            <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
-                Submit Application
-            </button>
-        </form>
     </div>
-</div>
 
-<!-- Donate Modal -->
-<div id="donateModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-semibold">Donate Supplies</h3>
-            <button onclick="closeDonateModal()" class="text-gray-500 hover:text-gray-700">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
+    <!-- Donate Modal -->
+    <div id="donateModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">Donate Supplies</h3>
+                <button onclick="closeDonateModal()" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <form onsubmit="submitDonateForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
+                    <input type="text" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Contact Email *</label>
+                    <input type="email" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="your.email@example.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                    <input type="tel" required pattern="[0-9]{10,11}" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="09123456789">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Donation Type *</label>
+                    <select required class="w-full p-2 border border-gray-300 rounded-lg">
+                        <option value="">Select donation type</option>
+                        <option>Pet Food (Dry)</option>
+                        <option>Pet Food (Wet)</option>
+                        <option>Water Bowls</option>
+                        <option>Food Bowls</option>
+                        <option>Medical Supplies</option>
+                        <option>Cleaning Supplies</option>
+                        <option>Monetary Donation</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Quantity/Amount</label>
+                    <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="e.g., 5 bags, ₱1000, etc.">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+                    <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Any additional information about your donation..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+                    Submit Donation
+                </button>
+            </form>
         </div>
-        <form onsubmit="submitDonateForm(event)" class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
-                <input type="text" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Enter your name">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Contact Email *</label>
-                <input type="email" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="your.email@example.com">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
-                <input type="tel" required pattern="[0-9]{10,11}" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="09123456789">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Donation Type *</label>
-                <select required class="w-full p-2 border border-gray-300 rounded-lg">
-                    <option value="">Select donation type</option>
-                    <option>Pet Food (Dry)</option>
-                    <option>Pet Food (Wet)</option>
-                    <option>Water Bowls</option>
-                    <option>Food Bowls</option>
-                    <option>Medical Supplies</option>
-                    <option>Cleaning Supplies</option>
-                    <option>Monetary Donation</option>
-                    <option>Other</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Quantity/Amount</label>
-                <input type="text" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="e.g., 5 bags, ₱1000, etc.">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
-                <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Any additional information about your donation..."></textarea>
-            </div>
-            <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
-                Submit Donation
-            </button>
-        </form>
     </div>
-</div>
 
-<!-- Adopt Modal -->
-<div id="adoptModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-semibold">Adopt a Pet</h3>
-            <button onclick="closeAdoptModal()" class="text-gray-500 hover:text-gray-700">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
+    <!-- Adopt Modal -->
+    <div id="adoptModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">Adopt a Pet</h3>
+                <button onclick="closeAdoptModal()" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <form onsubmit="submitAdoptForm(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                    <input type="text" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Enter your full name">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                    <input type="email" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="your.email@example.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                    <input type="tel" required pattern="[0-9]{10,11}" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="09123456789">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Address *</label>
+                    <textarea required class="w-full p-2 border border-gray-300 rounded-lg h-16" placeholder="Enter your complete address"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Pet Type</label>
+                    <select class="w-full p-2 border border-gray-300 rounded-lg">
+                        <option>Cat</option>
+                        <option>Dog</option>
+                        <option>Either</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Housing Situation *</label>
+                    <select required class="w-full p-2 border border-gray-300 rounded-lg">
+                        <option value="">Select housing type</option>
+                        <option>Own House with Yard</option>
+                        <option>Own House without Yard</option>
+                        <option>Apartment/Condo</option>
+                        <option>Renting with Pet Permission</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Experience with Pets</label>
+                    <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Tell us about your experience with pets..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+                    Submit Application
+                </button>
+            </form>
         </div>
-        <form onsubmit="submitAdoptForm(event)" class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
-                <input type="text" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Enter your full name">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-                <input type="email" required class="w-full p-2 border border-gray-300 rounded-lg" placeholder="your.email@example.com">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
-                <input type="tel" required pattern="[0-9]{10,11}" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="09123456789">
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Address *</label>
-                <textarea required class="w-full p-2 border border-gray-300 rounded-lg h-16" placeholder="Enter your complete address"></textarea>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Pet Type</label>
-                <select class="w-full p-2 border border-gray-300 rounded-lg">
-                    <option>Cat</option>
-                    <option>Dog</option>
-                    <option>Either</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Housing Situation *</label>
-                <select required class="w-full p-2 border border-gray-300 rounded-lg">
-                    <option value="">Select housing type</option>
-                    <option>Own House with Yard</option>
-                    <option>Own House without Yard</option>
-                    <option>Apartment/Condo</option>
-                    <option>Renting with Pet Permission</option>
-                    <option>Other</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Experience with Pets</label>
-                <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Tell us about your experience with pets..."></textarea>
-            </div>
-            <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
-                Submit Application
-            </button>
-        </form>
     </div>
-</div>
+
+    <!-- Animal Detail Modal -->
+    <div id="animalModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-lg w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="animalModalTitle" class="text-xl font-semibold">Animal Details</h3>
+                <button onclick="closeAnimalModal()" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div id="animalModalContent" class="space-y-4">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Upload Modal -->
+    <div id="uploadModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">Upload Animal Photo</h3>
+                <button onclick="closeUploadModal()" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <form onsubmit="submitPhotoUpload(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Photo</label>
+                    <input type="file" accept="image/*" class="w-full p-2 border border-gray-300 rounded-lg">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Station Location</label>
+                    <select class="w-full p-2 border border-gray-300 rounded-lg">
+                        <option>Station A1 - Serendra A</option>
+                        <option>Station B2 - Serendra B</option>
+                        <option>Station C3 - BGC High Street A</option>
+                        <option>Station D4 - BGC High Street B</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Animal Description</label>
+                    <textarea class="w-full p-2 border border-gray-300 rounded-lg h-20" placeholder="Describe the animal..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition">
+                    Upload Photo
+                </button>
+            </form>
+        </div>
+    </div>
 
     <script>
-    // Initialize Lucide icons
-    lucide.createIcons();
+        // Initialize Lucide icons
+        lucide.createIcons();
 
-    // Map initialization
-    let map;
-    let stationMarkers = {};
+        // Map initialization
+        let map;
+        let stationMarkers = {};
 
-    // Station data with coordinates and detailed status information
-const stationData = {
-    'A1': {
-        name: 'Station A1',
-        location: 'Serendra A',
-        coordinates: [14.549595, 121.054277], 
-        status: 'Active',
-        foodLevel: '85%',
-        waterLevel: '92%',
-        batteryLevel: '67%',
-        lastMaintenance: '3 days ago',
-        lastMotion: '2 minutes ago',
-        animalsDetected: 1, // 0 or 1
-        lastVisit: '2 minutes ago',
-        animalsToday: 5,
-        description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
-        cctvImage: 'images/camera/cateat1.png',
-        qrImage: 'images/qr/qrA.png'
-    },
-    'B2': {
-        name: 'Station B2',
-        location: 'Serendra B',
-        coordinates: [14.549676, 121.053562],
-        status: 'Active',
-        foodLevel: '67%',
-        waterLevel: '78%',
-        batteryLevel: '89%',
-        lastMaintenance: '1 day ago',
-        lastMotion: '15 minutes ago',
-        animalsDetected: 0,
-        lastVisit: '15 minutes ago',
-        animalsToday: 3,
-        description: 'This station serves both cats and dogs. Regular maintenance by local volunteers.',
-        cctvImage: 'images/camera/nocat.png',
-        qrImage: 'images/qr/qrB.png'
-    },
-    'C3': {
-        name: 'Station C3',
-        location: 'BGC High Street A',
-        coordinates: [14.550129, 121.052568],
-        status: 'Needs Attention',
-        foodLevel: '23%',
-        waterLevel: '45%',
-        batteryLevel: '34%',
-        lastMaintenance: '5 days ago',
-        lastMotion: '1 hour ago',
-        animalsDetected: 1,
-        lastVisit: '1 hour ago',
-        animalsToday: 7,
-        description: 'Busy location that requires frequent refills. Popular with local stray population.',
-        cctvImage: 'images/camera/cateat12.png',
-        qrImage: 'images/qr/qrC.png'
-    },
-    'D4': {
-        name: 'Station D4',
-        location: 'BGC High Street B',
-        coordinates: [14.550318, 121.051658],
-        status: 'Active',
-        foodLevel: '91%',
-        waterLevel: '88%',
-        batteryLevel: '76%',
-        lastMaintenance: '2 days ago',
-        lastMotion: '30 minutes ago',
-        animalsDetected: 1,
-        lastVisit: '30 minutes ago',
-        animalsToday: 2,
-        description: 'Peaceful park location, recently installed. Growing popularity among local strays.',
-        cctvImage: 'images/camera/cateat3.png',
-        qrImage: 'images/qr/qrD.png'
-    },
-    'E5': {
-        name: 'Station E5',
-        location: 'BGC High Street C',
-        coordinates: [14.550618, 121.050943],
-        status: 'Active',
-        foodLevel: '74%',
-        waterLevel: '81%',
-        batteryLevel: '92%',
-        lastMaintenance: '1 day ago',
-        lastMotion: '45 minutes ago',
-        animalsDetected: 0,
-        lastVisit: '45 minutes ago',
-        animalsToday: 4,
-        description: 'New station in busy commercial area. Popular with workers who help monitor.',
-        cctvImage: 'images/camera/nocat2.png',
-        qrImage: 'images/qr/qrE.png'
-    },
-    'F6': {
-        name: 'Station F6',
-        location: 'BGC High Street D',
-        coordinates: [14.550930, 121.050068],
-        status: 'Active',
-        foodLevel: '89%',
-        waterLevel: '95%',
-        batteryLevel: '88%',
-        lastMaintenance: '12 hours ago',
-        lastMotion: '10 minutes ago',
-        animalsDetected: 1,
-        lastVisit: '10 minutes ago',
-        animalsToday: 6,
-        description: 'Well-maintained by student volunteers and faculty.',
-        cctvImage: 'images/camera/cateat4.png',
-        qrImage: 'images/qr/qrF.png'
-    },
-    'G7': {
-        name: 'Station G7',
-        location: 'BGC High Street E',
-        coordinates: [14.551208, 121.049279],
-        status: 'Active',
-        foodLevel: '56%',
-        waterLevel: '63%',
-        batteryLevel: '71%',
-        lastMaintenance: '4 days ago',
-        lastMotion: '25 minutes ago',
-        animalsDetected: 1,
-        lastVisit: '25 minutes ago',
-        animalsToday: 8,
-        description: 'High-traffic shopping area. Frequent visits from both strays and community members.',
-        cctvImage: 'images/camera/cateat5.jpg',
-        qrImage: 'images/qr/qrG.png'
-    },
-    'H8': {
-        name: 'Station H8',
-        location: 'BGC High Street F',
-        coordinates: [14.551402, 121.048277],
-        status: 'Active',
-        foodLevel: '78%',
-        waterLevel: '72%',
-        batteryLevel: '65%',
-        lastMaintenance: '2 days ago',
-        lastMotion: '1 hour ago',
-        animalsDetected: 0,
-        lastVisit: '1 hour ago',
-        animalsToday: 3,
-        description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
-        cctvImage: 'images/camera/nocat3.png',
-        qrImage: 'images/qr/qrH.png'
-    },
-    'I9': {
-        name: 'Station I9',
-        location: 'Track 30th A',
-        coordinates: [14.552040, 121.051462],
-        status: 'Needs Attention',
-        foodLevel: '31%',
-        waterLevel: '28%',
-        batteryLevel: '43%',
-        lastMaintenance: '7 days ago',
-        lastMotion: '3 hours ago',
-        animalsDetected: 1,
-        lastVisit: '3 hours ago',
-        animalsToday: 5,
-        description: 'Super busy area with many cats. Requires frequent maintenance due to harsh conditions.',
-        cctvImage: 'images/camera/cateat6.webp',
-        qrImage: 'images/qr/qrI.png'
-    },
-    'J10': {
-        name: 'Station J10',
-        location: 'Track 30th B',
-        coordinates: [14.552281, 121.050376],
-        status: 'Active',
-        foodLevel: '83%',
-        waterLevel: '87%',
-        batteryLevel: '79%',
-        lastMaintenance: '1 day ago',
-        lastMotion: '20 minutes ago',
-        animalsDetected: 1,
-        lastVisit: '20 minutes ago',
-        animalsToday: 4,
-        description: 'Scenic park location. Popular with tourists who often help feed the animals.',
-        cctvImage: 'images/camera/cateat11.png',
-        qrImage: 'images/qr/qrJ.png'
-    },
-    'K11': {
-        name: 'Station K11',
-        location: 'Terra 28th A',
-        coordinates: [14.549234, 121.050570],
-        status: 'Active',
-        foodLevel: '92%',
-        waterLevel: '89%',
-        batteryLevel: '94%',
-        lastMaintenance: '6 hours ago',
-        lastMotion: '35 minutes ago',
-        animalsDetected: 1,
-        lastVisit: '35 minutes ago',
-        animalsToday: 2,
-        description: 'Frequent jogging spot of the people. Well-maintained by athletic club volunteers.',
-        cctvImage: 'images/camera/cateat10.png',
-        qrImage: 'images/qr/qrK.png'
-    },
-    'L12': {
-        name: 'Station L12',
-        location: 'Terra 28th B',
-        coordinates: [14.549501, 121.049473],
-        status: 'Needs Attention',
-        foodLevel: '19%',
-        waterLevel: '34%',
-        batteryLevel: '52%',
-        lastMaintenance: '6 days ago',
-        lastMotion: '2 hours ago',
-        animalsDetected: 1,
-        lastVisit: '2 hours ago',
-        animalsToday: 6,
-        description: 'High animal traffic due to nearby food sources. Needs urgent refill.',
-        cctvImage: 'images/camera/cateat9.jpeg',
-        qrImage: 'images/qr/qrL.png'
-    }
-};
-
-    // Initialize map when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        initializeMap();
-        updateQRCode(); // Initialize QR code
-
-        switchCCTVStation('A1');
-        
-        // Try to load the first CCTV image
-        const cctvImg = document.getElementById('cctvFeed');
-        cctvImg.onload = function() {
-            this.style.display = 'block';
-            document.getElementById('cctvPlaceholder').style.display = 'none';
+        // Station data with coordinates and detailed status information
+        const stationData = {
+            'A1': {
+                name: 'Station A1',
+                location: 'Serendra A',
+                coordinates: [14.549595, 121.054277], 
+                status: 'Active',
+                foodLevel: '85%',
+                waterLevel: '92%',
+                batteryLevel: '67%',
+                lastMaintenance: '3 days ago',
+                lastMotion: '2 minutes ago',
+                animalsDetected: 1,
+                lastVisit: '2 minutes ago',
+                animalsToday: 5,
+                description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
+                cctvImage: 'images/camera/cateat1.png',
+                qrImage: 'images/qr/qrA.png'
+            },
+            'B2': {
+                name: 'Station B2',
+                location: 'Serendra B',
+                coordinates: [14.549676, 121.053562],
+                status: 'Active',
+                foodLevel: '67%',
+                waterLevel: '78%',
+                batteryLevel: '89%',
+                lastMaintenance: '1 day ago',
+                lastMotion: '15 minutes ago',
+                animalsDetected: 0,
+                lastVisit: '15 minutes ago',
+                animalsToday: 3,
+                description: 'This station serves both cats and dogs. Regular maintenance by local volunteers.',
+                cctvImage: 'images/camera/nocat.png',
+                qrImage: 'images/qr/qrB.png'
+            },
+            'C3': {
+                name: 'Station C3',
+                location: 'BGC High Street A',
+                coordinates: [14.550129, 121.052568],
+                status: 'Needs Attention',
+                foodLevel: '23%',
+                waterLevel: '45%',
+                batteryLevel: '34%',
+                lastMaintenance: '5 days ago',
+                lastMotion: '1 hour ago',
+                animalsDetected: 1,
+                lastVisit: '1 hour ago',
+                animalsToday: 7,
+                description: 'Busy location that requires frequent refills. Popular with local stray population.',
+                cctvImage: 'images/camera/cateat12.png',
+                qrImage: 'images/qr/qrC.png'
+            },
+            'D4': {
+                name: 'Station D4',
+                location: 'BGC High Street B',
+                coordinates: [14.550318, 121.051658],
+                status: 'Active',
+                foodLevel: '91%',
+                waterLevel: '88%',
+                batteryLevel: '76%',
+                lastMaintenance: '2 days ago',
+                lastMotion: '30 minutes ago',
+                animalsDetected: 1,
+                lastVisit: '30 minutes ago',
+                animalsToday: 2,
+                description: 'Peaceful park location, recently installed. Growing popularity among local strays.',
+                cctvImage: 'images/camera/cateat3.png',
+                qrImage: 'images/qr/qrD.png'
+            },
+            'E5': {
+                name: 'Station E5',
+                location: 'BGC High Street C',
+                coordinates: [14.550618, 121.050943],
+                status: 'Active',
+                foodLevel: '74%',
+                waterLevel: '81%',
+                batteryLevel: '92%',
+                lastMaintenance: '1 day ago',
+                lastMotion: '45 minutes ago',
+                animalsDetected: 0,
+                lastVisit: '45 minutes ago',
+                animalsToday: 4,
+                description: 'New station in busy commercial area. Popular with workers who help monitor.',
+                cctvImage: 'images/camera/nocat2.png',
+                qrImage: 'images/qr/qrE.png'
+            },
+            'F6': {
+                name: 'Station F6',
+                location: 'BGC High Street D',
+                coordinates: [14.550930, 121.050068],
+                status: 'Active',
+                foodLevel: '89%',
+                waterLevel: '95%',
+                batteryLevel: '88%',
+                lastMaintenance: '12 hours ago',
+                lastMotion: '10 minutes ago',
+                animalsDetected: 1,
+                lastVisit: '10 minutes ago',
+                animalsToday: 6,
+                description: 'Well-maintained by student volunteers and faculty.',
+                cctvImage: 'images/camera/cateat4.png',
+                qrImage: 'images/qr/qrF.png'
+            },
+            'G7': {
+                name: 'Station G7',
+                location: 'BGC High Street E',
+                coordinates: [14.551208, 121.049279],
+                status: 'Active',
+                foodLevel: '56%',
+                waterLevel: '63%',
+                batteryLevel: '71%',
+                lastMaintenance: '4 days ago',
+                lastMotion: '25 minutes ago',
+                animalsDetected: 1,
+                lastVisit: '25 minutes ago',
+                animalsToday: 8,
+                description: 'High-traffic shopping area. Frequent visits from both strays and community members.',
+                cctvImage: 'images/camera/cateat5.jpg',
+                qrImage: 'images/qr/qrG.png'
+            },
+            'H8': {
+                name: 'Station H8',
+                location: 'BGC High Street F',
+                coordinates: [14.551402, 121.048277],
+                status: 'Active',
+                foodLevel: '78%',
+                waterLevel: '72%',
+                batteryLevel: '65%',
+                lastMaintenance: '2 days ago',
+                lastMotion: '1 hour ago',
+                animalsDetected: 0,
+                lastVisit: '1 hour ago',
+                animalsToday: 3,
+                description: 'High-traffic location with regular feline visitors. Well-maintained and popular among the community.',
+                cctvImage: 'images/camera/nocat3.png',
+                qrImage: 'images/qr/qrH.png'
+            },
+            'I9': {
+                name: 'Station I9',
+                location: 'Track 30th A',
+                coordinates: [14.552040, 121.051462],
+                status: 'Needs Attention',
+                foodLevel: '31%',
+                waterLevel: '28%',
+                batteryLevel: '43%',
+                lastMaintenance: '7 days ago',
+                lastMotion: '3 hours ago',
+                animalsDetected: 1,
+                lastVisit: '3 hours ago',
+                animalsToday: 5,
+                description: 'Super busy area with many cats. Requires frequent maintenance due to harsh conditions.',
+                cctvImage: 'images/camera/cateat6.webp',
+                qrImage: 'images/qr/qrI.png'
+            },
+            'J10': {
+                name: 'Station J10',
+                location: 'Track 30th B',
+                coordinates: [14.552281, 121.050376],
+                status: 'Active',
+                foodLevel: '83%',
+                waterLevel: '87%',
+                batteryLevel: '79%',
+                lastMaintenance: '1 day ago',
+                lastMotion: '20 minutes ago',
+                animalsDetected: 1,
+                lastVisit: '20 minutes ago',
+                animalsToday: 4,
+                description: 'Scenic park location. Popular with tourists who often help feed the animals.',
+                cctvImage: 'images/camera/cateat11.png',
+                qrImage: 'images/qr/qrJ.png'
+            },
+            'K11': {
+                name: 'Station K11',
+                location: 'Terra 28th A',
+                coordinates: [14.549234, 121.050570],
+                status: 'Active',
+                foodLevel: '92%',
+                waterLevel: '89%',
+                batteryLevel: '94%',
+                lastMaintenance: '6 hours ago',
+                lastMotion: '35 minutes ago',
+                animalsDetected: 1,
+                lastVisit: '35 minutes ago',
+                animalsToday: 2,
+                description: 'Frequent jogging spot of the people. Well-maintained by athletic club volunteers.',
+                cctvImage: 'images/camera/cateat10.png',
+                qrImage: 'images/qr/qrK.png'
+            },
+            'L12': {
+                name: 'Station L12',
+                location: 'Terra 28th B',
+                coordinates: [14.549501, 121.049473],
+                status: 'Needs Attention',
+                foodLevel: '19%',
+                waterLevel: '34%',
+                batteryLevel: '52%',
+                lastMaintenance: '6 days ago',
+                lastMotion: '2 hours ago',
+                animalsDetected: 1,
+                lastVisit: '2 hours ago',
+                animalsToday: 6,
+                description: 'High animal traffic due to nearby food sources. Needs urgent refill.',
+                cctvImage: 'images/camera/cateat9.jpeg',
+                qrImage: 'images/qr/qrL.png'
+            }
         };
-    });
 
-    function initializeMap() {
-        // Initialize the map centered on Manila (change coordinates as needed)
-        map = L.map('map').setView([14.550555, 121.051486], 17);
+        // Animal data for modals
+        const animalData = {
+            'whiskers': {
+                name: 'Whiskers',
+                type: 'Cat',
+                station: 'Station A1',
+                status: 'Available for Adoption',
+                description: 'Orange tabby cat, regular visitor at Station A1. Very friendly and appears healthy. Loves to interact with people and other cats.',
+                health: 'Excellent',
+                age: 'Adult (2-3 years)',
+                temperament: 'Friendly, Social, Playful',
+                lastSeen: '2 hours ago',
+                alt: 'orange tabby cat',
+                url: 'images/orange-tabby.jpg',
+            },
+            'shadow': {
+                name: 'Shadow',
+                type: 'Dog',
+                station: 'Station B2',
+                status: 'Under Observation',
+                description: 'Black dog, visits Station B2 nightly. Shy but appears to be gaining weight. Shows signs of previous trauma but is slowly trusting humans.',
+                health: 'Good, improving',
+                age: 'Young Adult (1-2 years)',
+                temperament: 'Shy, Gentle, Cautious',
+                lastSeen: '15 minutes ago',
+                alt: 'black dog',
+                url: 'images/black-dog.jpg',
+            },
+            'patches': {
+                name: 'Patches',
+                type: 'Cat',
+                station: 'Station C3',
+                status: 'Needs TNR',
+                description: 'Calico cat with distinctive markings. Mother to 3 kittens, needs TNR assistance. Very protective of her young but allows humans nearby.',
+                health: 'Good, nursing',
+                age: 'Adult (3-4 years)',
+                temperament: 'Protective, Maternal, Wary',
+                lastSeen: '1 hour ago',
+                alt: 'calico cat',
+                url: 'images/calico-cat.jpg',
+            },
+            'buddy': {
+                name: 'Buddy',
+                type: 'Dog',
+                station: 'Station D4',
+                status: 'New Visitor',
+                description: 'Golden retriever mix, very social. Recently started visiting Station D4. Appears to be lost rather than stray - may have an owner.',
+                health: 'Excellent',
+                age: 'Adult (4-5 years)',
+                temperament: 'Social, Friendly, Well-trained',
+                lastSeen: '30 minutes ago',
+                alt: 'golden retriever',
+                url: 'images/golden-retriever.jpg',
+            }
+        };
 
-        // Add OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-
-        // Add markers for each station
-        Object.keys(stationData).forEach(stationId => {
-            const station = stationData[stationId];
-            const markerColor = station.status === 'Active' ? 'green' : 
-                               station.status === 'Needs Attention' ? 'orange' : 'red';
+        // Initialize map when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMap();
+            updateQRCode();
+            switchCCTVStation('A1');
+            setupScrollToTop();
+            setupStickyNavigation();
             
-            // Create custom icon
-            const customIcon = L.divIcon({
-                className: 'custom-marker',
-                html: `<div style="background-color: ${markerColor}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
-                iconSize: [20, 20],
-                iconAnchor: [10, 10]
-            });
-
-            const marker = L.marker(station.coordinates, { icon: customIcon })
-                .addTo(map);
-
-            // Create hover tooltip
-            const hoverTooltip = L.tooltip({
-                permanent: false,
-                direction: 'top',
-                offset: [0, -10],
-                className: 'custom-tooltip'
-            }).setContent(`
-                <div style="font-size: 12px; line-height: 1.3;">
-                    <div style="font-weight: bold; margin-bottom: 2px;">${station.name}</div>
-                    <div style="color: #666; margin-bottom: 3px;">${station.location}</div>
-                    <div style="display: flex; justify-content: space-between; gap: 10px;">
-                        <span>Food: ${station.foodLevel}</span>
-                        <span>Water: ${station.waterLevel}</span>
-                    </div>
-                    <div style="margin-top: 2px; font-size: 10px; color: #888;">
-                        Click for details
-                    </div>
-                </div>
-            `);
-
-            // Bind hover tooltip
-            marker.bindTooltip(hoverTooltip);
-
-            // Click event to open modal
-            marker.on('click', function() {
-                showStationInfo(stationId);
-            });
-
-            // Hover effects
-            marker.on('mouseover', function() {
-                this.openTooltip();
-            });
-
-            marker.on('mouseout', function() {
-                this.closeTooltip();
-            });
-
-            stationMarkers[stationId] = marker;
+            // Try to load the first CCTV image
+            const cctvImg = document.getElementById('cctvFeed');
+            cctvImg.onload = function() {
+                this.style.display = 'block';
+                document.getElementById('cctvPlaceholder').style.display = 'none';
+            };
         });
 
-        // Add legend
-        const legend = L.control({position: 'bottomright'});
-        legend.onAdd = function(map) {
-            const div = L.DomUtil.create('div', 'legend');
-            div.innerHTML = `
-                <div style="background: white; padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">
-                    <h4 style="margin: 0 0 5px 0; font-weight: bold; font-size: 12px;">Station Status</h4>
-                    <div style="display: flex; align-items: center; margin-bottom: 3px; font-size: 11px;">
-                        <div style="width: 12px; height: 12px; background-color: green; border-radius: 50%; margin-right: 5px;"></div>
-                        Active & Well-Stocked
+        // Sticky Navigation Setup
+        function setupStickyNavigation() {
+            const nav = document.getElementById('mainNav');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Add scroll event listener for sticky nav effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    nav.classList.add('nav-sticky');
+                } else {
+                    nav.classList.remove('nav-sticky');
+                }
+                
+                // Update active navigation link
+                updateActiveNavLink();
+            });
+            
+            // Add click event listeners to nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    scrollToSection(targetId);
+                    closeMobileMenu();
+                });
+            });
+        }
+
+        // Update active navigation link based on scroll position
+        function updateActiveNavLink() {
+            const sections = ['home', 'dashboard', 'stations', 'community', 'animals', 'report'];
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        currentSection = sectionId;
+                    }
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('nav-link-active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('nav-link-active');
+                }
+            });
+        }
+
+        // Scroll to Top Setup
+        function setupScrollToTop() {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            });
+        }
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+            const closeIcon = document.getElementById('closeIcon');
+            
+            mobileMenu.classList.toggle('open');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+            const closeIcon = document.getElementById('closeIcon');
+            
+            mobileMenu.classList.remove('open');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+        }
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.add('hidden'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('[id$="Tab"]');
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-white', 'text-purple-600', 'shadow-sm');
+                tab.classList.add('text-gray-600');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + 'Content').classList.remove('hidden');
+            
+            // Add active class to selected tab
+            const activeTab = document.getElementById(tabName + 'Tab');
+            activeTab.classList.add('bg-white', 'text-purple-600', 'shadow-sm');
+            activeTab.classList.remove('text-gray-600');
+        }
+
+        // Initialize map
+        function initializeMap() {
+            map = L.map('map').setView([14.550555, 121.051486], 17);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            Object.keys(stationData).forEach(stationId => {
+                const station = stationData[stationId];
+                const markerColor = station.status === 'Active' ? 'green' :
+                                    station.status === 'Needs Attention' ? 'orange' : 'red';
+                
+                const customIcon = L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div style="background-color: ${markerColor}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
+                    iconSize: [20, 20],
+                    iconAnchor: [10, 10]
+                });
+
+                const marker = L.marker(station.coordinates, { icon: customIcon }).addTo(map);
+                
+                const hoverTooltip = L.tooltip({
+                    permanent: false,
+                    direction: 'top',
+                    offset: [0, -10],
+                    className: 'custom-tooltip'
+                }).setContent(`
+                    <div style="font-size: 12px; line-height: 1.3;">
+                        <div style="font-weight: bold; margin-bottom: 2px;">${station.name}</div>
+                        <div style="color: #666; margin-bottom: 3px;">${station.location}</div>
+                        <div style="display: flex; justify-content: space-between; gap: 10px;">
+                            <span>Food: ${station.foodLevel}</span>
+                            <span>Water: ${station.waterLevel}</span>
+                        </div>
+                        <div style="margin-top: 2px; font-size: 10px; color: #888;">
+                            Click for details
+                        </div>
                     </div>
-                    <div style="display: flex; align-items: center; margin-bottom: 3px; font-size: 11px;">
-                        <div style="width: 12px; height: 12px; background-color: orange; border-radius: 50%; margin-right: 5px;"></div>
-                        Needs Attention
+                `);
+                
+                marker.bindTooltip(hoverTooltip);
+                marker.on('click', function() {
+                    showStationInfo(stationId);
+                });
+                
+                marker.on('mouseover', function() {
+                    this.openTooltip();
+                });
+                
+                marker.on('mouseout', function() {
+                    this.closeTooltip();
+                });
+                
+                stationMarkers[stationId] = marker;
+            });
+        }
+
+        // Switch CCTV station function
+        function switchCCTVStation(stationId) {
+            const station = stationData[stationId];
+            const cctvImg = document.getElementById('cctvFeed');
+            const cctvPlaceholder = document.getElementById('cctvPlaceholder');
+            const stationName = document.getElementById('currentStationName');
+            const stationStatus = document.getElementById('currentStationStatus');
+            
+            stationName.textContent = station.name;
+            stationStatus.textContent = station.name;
+            
+            cctvImg.src = station.cctvImage;
+            cctvImg.style.display = 'none';
+            cctvPlaceholder.style.display = 'flex';
+            
+            cctvPlaceholder.querySelector('p').textContent = `Live CCTV Feed - ${station.name}`;
+            
+            document.getElementById('foodLevel').textContent = station.foodLevel;
+            document.getElementById('waterLevel').textContent = station.waterLevel;
+            document.getElementById('batteryLevel').textContent = station.batteryLevel;
+            document.getElementById('lastMaintenance').textContent = station.lastMaintenance;
+            document.getElementById('lastMotion').textContent = `Last Motion: ${station.lastMotion}`;
+            document.getElementById('animalsDetected').textContent = `Animals Detected: ${station.animalsDetected}`;
+            
+            // Update color coding
+            const foodLevelElement = document.getElementById('foodLevel');
+            const waterLevelElement = document.getElementById('waterLevel');
+            const batteryLevelElement = document.getElementById('batteryLevel');
+            
+            const foodContainer = document.getElementById('foodContainer');
+            const waterContainer = document.getElementById('waterContainer');
+            const batteryContainer = document.getElementById('batteryContainer');
+            
+            const foodDot = document.getElementById('foodDot');
+            const waterDot = document.getElementById('waterDot');
+            const batteryDot = document.getElementById('batteryDot');
+
+            // Food level color coding
+            const foodPercent = parseInt(station.foodLevel);
+            foodLevelElement.className = 'font-semibold';
+            foodContainer.className = 'flex items-center justify-between p-3 rounded-lg';
+            foodDot.className = 'w-3 h-3 rounded-full mr-3';
+            
+            if (foodPercent < 30) {
+                foodLevelElement.classList.add('text-red-600');
+                foodContainer.classList.add('bg-red-50');
+                foodDot.classList.add('bg-red-500');
+            } else if (foodPercent < 60) {
+                foodLevelElement.classList.add('text-orange-600');
+                foodContainer.classList.add('bg-orange-50');
+                foodDot.classList.add('bg-orange-500');
+            } else {
+                foodLevelElement.classList.add('text-green-600');
+                foodContainer.classList.add('bg-green-50');
+                foodDot.classList.add('bg-green-500');
+            }
+
+            // Water level color coding
+            const waterPercent = parseInt(station.waterLevel);
+            waterLevelElement.className = 'font-semibold';
+            waterContainer.className = 'flex items-center justify-between p-3 rounded-lg';
+            waterDot.className = 'w-3 h-3 rounded-full mr-3';
+            
+            if (waterPercent < 30) {
+                waterLevelElement.classList.add('text-red-600');
+                waterContainer.classList.add('bg-red-50');
+                waterDot.classList.add('bg-red-500');
+            } else if (waterPercent < 60) {
+                waterLevelElement.classList.add('text-orange-600');
+                waterContainer.classList.add('bg-orange-50');
+                waterDot.classList.add('bg-orange-500');
+            } else {
+                waterLevelElement.classList.add('text-blue-600');
+                waterContainer.classList.add('bg-blue-50');
+                waterDot.classList.add('bg-blue-500');
+            }
+
+            // Battery level color coding
+            const batteryPercent = parseInt(station.batteryLevel);
+            batteryLevelElement.className = 'font-semibold';
+            batteryContainer.className = 'flex items-center justify-between p-3 rounded-lg';
+            batteryDot.className = 'w-3 h-3 rounded-full mr-3';
+            
+            if (batteryPercent < 30) {
+                batteryLevelElement.classList.add('text-red-600');
+                batteryContainer.classList.add('bg-red-50');
+                batteryDot.classList.add('bg-red-500');
+            } else {
+                batteryLevelElement.classList.add('text-orange-600');
+                batteryContainer.classList.add('bg-orange-50');
+                batteryDot.classList.add('bg-orange-500');
+            }
+            
+            cctvImg.onload = function() {
+                this.style.display = 'block';
+                cctvPlaceholder.style.display = 'none';
+            };
+            
+            cctvImg.onerror = function() {
+                this.style.display = 'none';
+                cctvPlaceholder.style.display = 'flex';
+            };
+        }
+
+        // Update QR code function
+        function updateQRCode() {
+            const stationSelect = document.getElementById('stationSelect');
+            const selectedStationId = stationSelect.value;
+            const station = stationData[selectedStationId];
+            
+            const qrImg = document.getElementById('qrCodeImage');
+            const qrPlaceholder = document.getElementById('qrPlaceholder');
+            const qrLabel = document.getElementById('qrStationLabel');
+            
+            qrImg.src = station.qrImage;
+            qrLabel.textContent = `${station.name} - ${station.location}`;
+            
+            qrImg.style.display = 'none';
+            qrPlaceholder.style.display = 'flex';
+            
+            qrImg.onload = function() {
+                this.style.display = 'block';
+                qrPlaceholder.style.display = 'none';
+            };
+            
+            qrImg.onerror = function() {
+                this.style.display = 'none';
+                qrPlaceholder.style.display = 'flex';
+            };
+        }
+
+        // Smooth scrolling function
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Station info modal
+        function showStationInfo(stationId) {
+            const modal = document.getElementById('stationModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            const station = stationData[stationId];
+            title.textContent = station.name;
+            
+            content.innerHTML = `
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Location:</span>
+                        <span class="font-medium">${station.location}</span>
                     </div>
-                    <div style="display: flex; align-items: center; font-size: 11px;">
-                        <div style="width: 12px; height: 12px; background-color: red; border-radius: 50%; margin-right: 5px;"></div>
-                        Offline/Maintenance
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Status:</span>
+                        <span class="font-medium ${station.status === 'Active' ? 'text-green-600' : 'text-orange-600'}">${station.status}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Food Level:</span>
+                        <span class="font-medium">${station.foodLevel}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Water Level:</span>
+                        <span class="font-medium">${station.waterLevel}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Last Visit:</span>
+                        <span class="font-medium">${station.lastVisit}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Animals Today:</span>
+                        <span class="font-medium">${station.animalsToday}</span>
+                    </div>
+                    <div class="pt-3 border-t">
+                        <p class="text-sm text-gray-600">${station.description}</p>
+                    </div>
+                    <div class="flex space-x-2 pt-3">
+                        <button onclick="switchCCTVStation('${stationId}'); closeModal(); scrollToSection('dashboard');" class="flex-1 bg-purple-600 text-white py-2 px-4 rounded text-sm hover:bg-purple-700 transition">
+                            View Camera
+                        </button>
+                        <button class="flex-1 border border-purple-600 text-purple-600 py-2 px-4 rounded text-sm hover:bg-purple-50 transition">
+                            Report Issue
+                        </button>
                     </div>
                 </div>
             `;
-            return div;
-        };
-        legend.addTo(map);
-    }
-
-    // Function to switch CCTV station with FIXED color coding
-    function switchCCTVStation(stationId) {
-        const station = stationData[stationId];
-        const cctvImg = document.getElementById('cctvFeed');
-        const cctvPlaceholder = document.getElementById('cctvPlaceholder');
-        const stationName = document.getElementById('currentStationName');
-        const stationStatus = document.getElementById('currentStationStatus');
-        
-        // Update station names
-        stationName.textContent = station.name;
-        stationStatus.textContent = station.name;
-        
-        // Update CCTV image source - REPLACE THESE URLs WITH YOUR ACTUAL CCTV IMAGES
-        cctvImg.src = station.cctvImage;
-        
-        // Show placeholder while loading
-        cctvImg.style.display = 'none';
-        cctvPlaceholder.style.display = 'flex';
-        
-        // Update placeholder text
-        cctvPlaceholder.querySelector('p').textContent = `Live CCTV Feed - ${station.name}`;
-        
-        // Update station status information
-        document.getElementById('foodLevel').textContent = station.foodLevel;
-        document.getElementById('waterLevel').textContent = station.waterLevel;
-        document.getElementById('batteryLevel').textContent = station.batteryLevel;
-        document.getElementById('lastMaintenance').textContent = station.lastMaintenance;
-        document.getElementById('lastMotion').textContent = `Last Motion: ${station.lastMotion}`;
-        document.getElementById('animalsDetected').textContent = `Animals Detected: ${station.animalsDetected}`;
-        
-        // FIXED: Update color coding using classList methods instead of replacing className
-        const foodLevelElement = document.getElementById('foodLevel');
-        const waterLevelElement = document.getElementById('waterLevel');
-        const batteryLevelElement = document.getElementById('batteryLevel');
-        
-        const foodContainer = document.getElementById('foodContainer');
-        const waterContainer = document.getElementById('waterContainer');
-        const batteryContainer = document.getElementById('batteryContainer');
-        
-        const foodDot = document.getElementById('foodDot');
-        const waterDot = document.getElementById('waterDot');
-        const batteryDot = document.getElementById('batteryDot');
-
-        // Food level color coding
-        const foodPercent = parseInt(station.foodLevel);
-        
-        // Reset food classes
-        foodLevelElement.className = 'font-semibold';
-        foodContainer.className = 'flex items-center justify-between p-3 rounded-lg';
-        foodDot.className = 'w-3 h-3 rounded-full mr-3';
-        
-        if (foodPercent < 30) {
-            foodLevelElement.classList.add('text-red-600');
-            foodContainer.classList.add('bg-red-50');
-            foodDot.classList.add('bg-red-500');
-        } else if (foodPercent < 60) {
-            foodLevelElement.classList.add('text-orange-600');
-            foodContainer.classList.add('bg-orange-50');
-            foodDot.classList.add('bg-orange-500');
-        } else {
-            foodLevelElement.classList.add('text-green-600');
-            foodContainer.classList.add('bg-green-50');
-            foodDot.classList.add('bg-green-500');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
 
-        // Water level color coding
-        const waterPercent = parseInt(station.waterLevel);
-        
-        // Reset water classes
-        waterLevelElement.className = 'font-semibold';
-        waterContainer.className = 'flex items-center justify-between p-3 rounded-lg';
-        waterDot.className = 'w-3 h-3 rounded-full mr-3';
-        
-        if (waterPercent < 30) {
-            waterLevelElement.classList.add('text-red-600');
-            waterContainer.classList.add('bg-red-50');
-            waterDot.classList.add('bg-red-500');
-        } else if (waterPercent < 60) {
-            waterLevelElement.classList.add('text-orange-600');
-            waterContainer.classList.add('bg-orange-50');
-            waterDot.classList.add('bg-orange-500');
-        } else {
-            waterLevelElement.classList.add('text-blue-600');
-            waterContainer.classList.add('bg-blue-50');
-            waterDot.classList.add('bg-blue-500');
+        function closeModal() {
+            const modal = document.getElementById('stationModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
         }
 
-        // Battery level color coding
-        const batteryPercent = parseInt(station.batteryLevel);
-        
-        // Reset battery classes
-        batteryLevelElement.className = 'font-semibold';
-        batteryContainer.className = 'flex items-center justify-between p-3 rounded-lg';
-        batteryDot.className = 'w-3 h-3 rounded-full mr-3';
-        
-        if (batteryPercent < 30) {
-            batteryLevelElement.classList.add('text-red-600');
-            batteryContainer.classList.add('bg-red-50');
-            batteryDot.classList.add('bg-red-500');
-        } else {
-            batteryLevelElement.classList.add('text-orange-600');
-            batteryContainer.classList.add('bg-orange-50');
-            batteryDot.classList.add('bg-orange-500');
+        // Animal modal functions
+        function openAnimalModal(animalId) {
+            const modal = document.getElementById('animalModal');
+            const title = document.getElementById('animalModalTitle');
+            const content = document.getElementById('animalModalContent');
+            
+            const animal = animalData[animalId];
+            title.textContent = animal.name;
+            
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <div class="h-48 bg-gradient-to-br from-gray-200 to-gray-400 rounded-lg flex items-center justify-center">
+                        <img src="${animal.url}" alt="${animal.alt}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <span class="text-gray-600">Type:</span>
+                            <span class="font-medium ml-2">${animal.type}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Age:</span>
+                            <span class="font-medium ml-2">${animal.age}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Health:</span>
+                            <span class="font-medium ml-2">${animal.health}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Last Seen:</span>
+                            <span class="font-medium ml-2">${animal.lastSeen}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-gray-600">Station:</span>
+                        <span class="font-medium ml-2">${animal.station}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-600">Temperament:</span>
+                        <span class="font-medium ml-2">${animal.temperament}</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-600">Status:</span>
+                        <span class="font-medium ml-2 px-2 py-1 rounded text-xs ${animal.status.includes('Adoption') ? 'bg-green-100 text-green-800' : 
+                            animal.status.includes('Observation') ? 'bg-yellow-100 text-yellow-800' : 
+                            animal.status.includes('TNR') ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800'}">${animal.status}</span>
+                    </div>
+                    <p class="text-sm text-gray-600">${animal.description}</p>
+                    <div class="flex space-x-2 pt-3">
+                        <button onclick="openAdoptModal(); closeAnimalModal();" class="flex-1 bg-purple-600 text-white py-2 px-4 rounded text-sm hover:bg-purple-700 transition">
+                            Adopt ${animal.name}
+                        </button>
+                        <button onclick="scrollToSection('report'); closeAnimalModal();" class="flex-1 border border-purple-600 text-purple-600 py-2 px-4 rounded text-sm hover:bg-purple-50 transition">
+                            Report Update
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
         }
-        
-        cctvImg.onload = function() {
-            this.style.display = 'block';
-            cctvPlaceholder.style.display = 'none';
-        };
-        
-        cctvImg.onerror = function() {
-            this.style.display = 'none';
-            cctvPlaceholder.style.display = 'flex';
-        };
-    }
 
-    // Function to update QR code based on selected station
-    function updateQRCode() {
-        const stationSelect = document.getElementById('stationSelect');
-        const selectedStationId = stationSelect.value;
-        const station = stationData[selectedStationId];
-        
-        const qrImg = document.getElementById('qrCodeImage');
-        const qrPlaceholder = document.getElementById('qrPlaceholder');
-        const qrLabel = document.getElementById('qrStationLabel');
-        
-        // Update QR code image source - REPLACE THESE URLs WITH YOUR ACTUAL QR CODE IMAGES
-        qrImg.src = station.qrImage;
-        qrLabel.textContent = `${station.name} - ${station.location}`;
-        
-        // Show placeholder while loading
-        qrImg.style.display = 'none';
-        qrPlaceholder.style.display = 'flex';
-        
-        qrImg.onload = function() {
-            this.style.display = 'block';
-            qrPlaceholder.style.display = 'none';
-        };
-        
-        qrImg.onerror = function() {
-            this.style.display = 'none';
-            qrPlaceholder.style.display = 'flex';
-        };
-    }
+        function closeAnimalModal() {
+            const modal = document.getElementById('animalModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
 
-    // Smooth scrolling function
-    function scrollToSection(sectionId) {
-        document.getElementById(sectionId).scrollIntoView({
-            behavior: 'smooth'
+        // Photo modal functions
+        function openPhotoModal(photoId) {
+            // For now, just open the animal modal with the same ID
+            openAnimalModal(photoId.replace('-', ''));
+        }
+
+        function openUploadModal() {
+            const modal = document.getElementById('uploadModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeUploadModal() {
+            const modal = document.getElementById('uploadModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Modal functions for Get Involved section
+        function openVolunteerModal() {
+            document.getElementById('volunteerModal').classList.remove('hidden');
+            document.getElementById('volunteerModal').classList.add('flex');
+        }
+
+        function closeVolunteerModal() {
+            document.getElementById('volunteerModal').classList.add('hidden');
+            document.getElementById('volunteerModal').classList.remove('flex');
+        }
+
+        function openDonateModal() {
+            document.getElementById('donateModal').classList.remove('hidden');
+            document.getElementById('donateModal').classList.add('flex');
+        }
+
+        function closeDonateModal() {
+            document.getElementById('donateModal').classList.add('hidden');
+            document.getElementById('donateModal').classList.remove('flex');
+        }
+
+        function openAdoptModal() {
+            document.getElementById('adoptModal').classList.remove('hidden');
+            document.getElementById('adoptModal').classList.add('flex');
+        }
+
+        function closeAdoptModal() {
+            document.getElementById('adoptModal').classList.add('hidden');
+            document.getElementById('adoptModal').classList.remove('flex');
+        }
+
+        // Form submission functions
+        function submitVolunteerForm(event) {
+            event.preventDefault();
+            alert('Thank you for your interest in volunteering! We will contact you within 2-3 business days.');
+            closeVolunteerModal();
+            event.target.reset();
+        }
+
+        function submitDonateForm(event) {
+            event.preventDefault();
+            alert('Thank you for your generous donation offer! Our team will reach out to coordinate the donation.');
+            closeDonateModal();
+            event.target.reset();
+        }
+
+        function submitAdoptForm(event) {
+            event.preventDefault();
+            alert('Thank you for your adoption application! We will review your application and contact you soon.');
+            closeAdoptModal();
+            event.target.reset();
+        }
+
+        function submitReport(event) {
+            event.preventDefault();
+            alert('Report submitted successfully! Our volunteers will review it shortly.');
+            event.target.reset();
+            updateQRCode();
+        }
+
+        function submitNameSuggestion(event) {
+            event.preventDefault();
+            alert('Thank you for your name suggestion! The community will vote on it.');
+            event.target.reset();
+        }
+
+        function submitAdoptionInquiry(event) {
+            event.preventDefault();
+            alert('Thank you for your adoption inquiry! We will contact you within 24 hours.');
+            event.target.reset();
+        }
+
+        function submitPhotoUpload(event) {
+            event.preventDefault();
+            alert('Photo uploaded successfully! It will be reviewed and added to the gallery.');
+            closeUploadModal();
+            event.target.reset();
+        }
+
+        // Close modals when clicking outside
+        document.getElementById('stationModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
         });
-    }
 
-    // Mobile menu toggle
-    function toggleMobileMenu() {
-        alert('Mobile menu would toggle here');
-    }
+        document.getElementById('volunteerModal').addEventListener('click', function(e) {
+            if (e.target === this) closeVolunteerModal();
+        });
 
-    // Station info modal
-    function showStationInfo(stationId) {
-        const modal = document.getElementById('stationModal');
-        const title = document.getElementById('modalTitle');
-        const content = document.getElementById('modalContent');
-        
-        const station = stationData[stationId];
-        title.textContent = station.name;
-        
-        content.innerHTML = `
-            <div class="space-y-3">
-                <div class="flex justify-between">
-                    <span class="text-gray-600">Location:</span>
-                    <span class="font-medium">${station.location}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-600">Status:</span>
-                    <span class="font-medium ${station.status === 'Active' ? 'text-green-600' : 'text-orange-600'}">${station.status}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-600">Food Level:</span>
-                    <span class="font-medium">${station.foodLevel}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-600">Water Level:</span>
-                    <span class="font-medium">${station.waterLevel}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-600">Last Visit:</span>
-                    <span class="font-medium">${station.lastVisit}</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-600">Animals Today:</span>
-                    <span class="font-medium">${station.animalsToday}</span>
-                </div>
-                <div class="pt-3 border-t">
-                    <p class="text-sm text-gray-600">${station.description}</p>
-                </div>
-                <div class="flex space-x-2 pt-3">
-                    <button onclick="switchCCTVStation('${stationId}'); closeModal(); scrollToSection('dashboard');" class="flex-1 bg-purple-600 text-white py-2 px-4 rounded text-sm hover:bg-purple-700 transition">
-                        View Camera
-                    </button>
-                    <button class="flex-1 border border-purple-600 text-purple-600 py-2 px-4 rounded text-sm hover:bg-purple-50 transition">
-                        Report Issue
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-    }
+        document.getElementById('donateModal').addEventListener('click', function(e) {
+            if (e.target === this) closeDonateModal();
+        });
 
-    function closeModal() {
-        const modal = document.getElementById('stationModal');
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
+        document.getElementById('adoptModal').addEventListener('click', function(e) {
+            if (e.target === this) closeAdoptModal();
+        });
 
-    // Report submission
-    function submitReport(event) {
-        event.preventDefault();
-        alert('Report submitted successfully! Our volunteers will review it shortly.');
-        event.target.reset();
-        updateQRCode(); // Reset QR code to first option
-    }
+        document.getElementById('animalModal').addEventListener('click', function(e) {
+            if (e.target === this) closeAnimalModal();
+        });
 
-    // Close modal when clicking outside
-    document.getElementById('stationModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeModal();
-        }
-    });
+        document.getElementById('uploadModal').addEventListener('click', function(e) {
+            if (e.target === this) closeUploadModal();
+        });
 
-    // Simulate real-time updates
-    function updateDashboard() {
-        const animalsFed = document.querySelector('.text-blue-600');
-        if (animalsFed) {
-            const current = parseInt(animalsFed.textContent);
-            if (Math.random() > 0.7) {
-                animalsFed.textContent = current + 1;
+        // Simulate real-time updates
+        function updateDashboard() {
+            const animalsFed = document.querySelector('.text-blue-600');
+            if (animalsFed) {
+                const current = parseInt(animalsFed.textContent);
+                if (Math.random() > 0.7) {
+                    animalsFed.textContent = current + 1;
+                }
             }
         }
-    }
 
-    setInterval(updateDashboard, 30000);
+        setInterval(updateDashboard, 30000);
 
-    // Add interactive hover effects
-    document.addEventListener('DOMContentLoaded', function() {
-        const cards = document.querySelectorAll('.card-hover');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
+        // Add interactive hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
             });
         });
-    });
-
-// Modal functions for Get Involved section
-function openVolunteerModal() {
-    document.getElementById('volunteerModal').classList.remove('hidden');
-    document.getElementById('volunteerModal').classList.add('flex');
-}
-
-function closeVolunteerModal() {
-    document.getElementById('volunteerModal').classList.add('hidden');
-    document.getElementById('volunteerModal').classList.remove('flex');
-}
-
-function openDonateModal() {
-    document.getElementById('donateModal').classList.remove('hidden');
-    document.getElementById('donateModal').classList.add('flex');
-}
-
-function closeDonateModal() {
-    document.getElementById('donateModal').classList.add('hidden');
-    document.getElementById('donateModal').classList.remove('flex');
-}
-
-function openAdoptModal() {
-    document.getElementById('adoptModal').classList.remove('hidden');
-    document.getElementById('adoptModal').classList.add('flex');
-}
-
-function closeAdoptModal() {
-    document.getElementById('adoptModal').classList.add('hidden');
-    document.getElementById('adoptModal').classList.remove('flex');
-}
-
-// Form submission functions
-function submitVolunteerForm(event) {
-    event.preventDefault();
-    alert('Thank you for your interest in volunteering! We will contact you within 2-3 business days.');
-    closeVolunteerModal();
-    event.target.reset();
-}
-
-function submitDonateForm(event) {
-    event.preventDefault();
-    alert('Thank you for your generous donation offer! Our team will reach out to coordinate the donation.');
-    closeDonateModal();
-    event.target.reset();
-}
-
-function submitAdoptForm(event) {
-    event.preventDefault();
-    alert('Thank you for your adoption application! We will review your application and contact you soon.');
-    closeAdoptModal();
-    event.target.reset();
-}
-
-// Close modals when clicking outside
-document.getElementById('volunteerModal').addEventListener('click', function(e) {
-    if (e.target === this) closeVolunteerModal();
-});
-
-document.getElementById('donateModal').addEventListener('click', function(e) {
-    if (e.target === this) closeDonateModal();
-});
-
-document.getElementById('adoptModal').addEventListener('click', function(e) {
-    if (e.target === this) closeAdoptModal();
-});
-</script>
+    </script>
 </body>
 </html>
-
-<!-- Now the station status cards will maintain their proper layout and alignment when switching between stations! The key fix was:
-
-1. **Added specific IDs** to the containers and dots (`foodContainer`, `waterContainer`, `batteryContainer`, `foodDot`, `waterDot`, `batteryDot`)
-2. **Used `classList` methods** instead of replacing the entire `className`
-3. **Reset classes first** before adding new ones to ensure clean state transitions
-4. **Maintained the original structure** of the flex layout with proper padding and spacing
-
-The cards will now properly show different colors based on the levels while keeping their card-like appearance intact! -->
